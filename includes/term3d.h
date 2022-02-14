@@ -12,7 +12,6 @@ typedef struct s_vertex
 {
 	struct s_vector3	*position;
 	struct s_vertex		*next;
-	struct s_vertex		*prev;
 }	t_vertex;
 
 #endif
