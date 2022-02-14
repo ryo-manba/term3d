@@ -1,7 +1,18 @@
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef TERM3D_H
+# define TERM3D_H
 
-# include "term3d_tkanzaki.h" 
-# include "term3d_rmatsuka.h"
+typedef struct s_transform
+{
+	long	x;
+	long	y;
+	long	z;
+}	t_transform;
+
+typedef struct s_vertex
+{
+	struct s_transform	*transform;
+	struct s_vertex		*next;
+	struct s_vertex		*prev;
+}	t_vertex;
 
 #endif
