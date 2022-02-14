@@ -3,9 +3,9 @@
 
 typedef struct s_vector3
 {
-	long	x;
-	long	y;
-	long	z;
+	float	x;
+	float	y;
+	float	z;
 }	t_vector3;
 
 typedef struct s_vertex
