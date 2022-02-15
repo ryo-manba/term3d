@@ -2,7 +2,9 @@
 
 void	draw(t_vertex *model_vertexes)
 {
-	char display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
+	//char display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
+
+	model_vertexes = (t_vertex *)model_vertexes;
 
 	// displayをスペースで初期化
 

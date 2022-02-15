@@ -2,6 +2,7 @@
 # define TERM3D_H
 
 # include <stdbool.h>
+# include <stdlib.h>
 
 typedef enum e_axis
 {
@@ -15,6 +16,13 @@ typedef struct s_rotation
 	enum e_axis	axis;
 	int			angle;
 }	t_rotation;
+
+typedef enum e_input_error
+{
+	CORRECT,
+	INVALID,
+	TERMINATED
+}	t_input_error;
 
 typedef struct s_vector3
 {
