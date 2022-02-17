@@ -1,23 +1,78 @@
 #include "rotate.h"
 
-void	rotate(t_vertex *model_vertexes, t_rotation *rotation)
-{
-	model_vertexes = (t_vertex *)model_vertexes;
+static double	get_vertical_element(const double magnitude, const double original_sin, const double original_cos, const double additional_radian);
+static double	get_horizontal_element(const double magnitude, const double original_sin, const double original_cos, const double additional_radian);
+static double	get_magnitude(const t_vector3 *position);
+static void rotate_vertex(t_vertex *index, const t_axis axis, const int additional_radian);
 
-	if (rotation->axis == X_AXIS)
+/**
+ * 頂点を全て反時計回りに軸回転させる
+ * @param model_vertexes 頂点の座標
+ * @param axis 回転軸
+ * @param degree 角度
+ */
+void	rotate(t_vertex *model_vertexes, const t_axis axis, const int degree)
+{
+	t_vertex *index;
+	const double additional_radian = (((double)degree / 360) * 2 * M_PI);
+
+	index = model_vertexes;
+	while (index != NULL)
 	{
-		// X軸を軸に回転
+		rotate_vertex(index, axis, additional_radian);
+		index = index->next;
 	}
-	else if (rotation->axis == Y_AXIS)
+}
+
+/* 頂点を反時計回りに軸回転させる */
+static void rotate_vertex(t_vertex *index, const t_axis axis, const int additional_radian)
+{
+	const double magnitude = get_magnitude(index->position);
+
+	if (axis == X_AXIS)
 	{
-		// Y軸を軸に回転
+		index->position->y = get_vertical_element(magnitude, index->position->y, index->position->z, additional_radian);
+		index->position->z = get_horizontal_element(magnitude, index->position->y, index->position->z, additional_radian);
 	}
-	else if (rotation->axis == Z_AXIS)
+	else if (axis == Y_AXIS)
 	{
-		// X軸を軸に回転
+		index->position->z = get_vertical_element(magnitude, index->position->z, index->position->x, additional_radian);
+		index->position->x = get_horizontal_element(magnitude, index->position->z, index->position->x, additional_radian);
+	}
+	else if (axis == Z_AXIS)
+	{
+		index->position->y = get_vertical_element(magnitude, index->position->y, index->position->x, additional_radian);
+		index->position->x = get_horizontal_element(magnitude, index->position->y, index->position->x, additional_radian);
 	}
 	else
 	{
 		return ;
 	}
+}
+
+/**
+ * 加法定理によって新しい縦座標を取得
+ * sin(α + β) = sinαcosβ + cosαsinβ
+ */
+static double get_vertical_element(const double magnitude, const double original_sin, const double original_cos, const double additional_radian)
+{
+	return (magnitude * (original_sin * cos(additional_radian) + original_cos * sin(additional_radian)));
+}
+
+/**
+ * 加法定理によって新しい横座標を取得
+ *  cos(α + β) = cosαcosβ − sinαsinβ
+ * */
+static double get_horizontal_element(const double magnitude, const double original_sin, const double original_cos, const double additional_radian)
+{
+	return (magnitude * (original_cos * cos(additional_radian) - original_sin * sin(additional_radian)));
+}
+
+/* 原点からのベクトルの大きさを取得 */
+static double get_magnitude(const t_vector3 *position)
+{
+	double square_magnitude;
+
+	square_magnitude = position->x * position->x + position->y + position->y;
+	return (sqrt(square_magnitude)); 
 }
