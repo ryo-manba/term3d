@@ -13,11 +13,12 @@ void	draw(const t_vertex *model_vertexes)
 	while (y < DISPLAY_HEIGHT)
 	{
 		x = 0;
-		while (x < DISPLAY_WIDTH)
+		while (x < DISPLAY_WIDTH - 1)
 		{
 			display[y][x] = ' ';
 			x++;
 		}
+		display[y][x] = '\0';
 		y++;
 	}
 
@@ -25,9 +26,9 @@ void	draw(const t_vertex *model_vertexes)
 	index = (t_vertex *)model_vertexes;
 	while (index != NULL)
 	{
-		x = (int)floor(index->position->x);
-		y = (int)floor(index->position->y);
-		if (y >= DISPLAY_HEIGHT || x >= DISPLAY_WIDTH)
+		x = (int)floor(index->position->x) + DISPLAY_WIDTH / 2;
+		y = (int)floor(index->position->y) + DISPLAY_HEIGHT / 2;
+		if (y >= DISPLAY_HEIGHT || x >= DISPLAY_WIDTH || y < 0 || x < 0)
 		{
 			index = index->next;
 			continue ;

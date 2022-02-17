@@ -1,12 +1,17 @@
 NAME = term3d
 DIR = srcs/
 FILES = main.c \
-	input.c \
 	draw.c \
-	rotate.c
+	rotate.c \
+	normalize.c \
+	tm_file_read.c \
+	tm_print_error_exit.c \
+	tm_split.c \
+	tm_vector_utils.c \
+	tm_wrapper.c
 SRCS = ${addprefix ${DIR},${FILES}}
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 OBJS = ${SRCS:.c=.o}
 HEADERS = includes/
 
@@ -16,7 +21,7 @@ HEADERS = includes/
 all: ${NAME}
 
 $(NAME): ${OBJS}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJS}
+	${CC} ${CFLAGS} -o ${NAME} ${OBJS} -lm
 
 clean:
 	${RM} ${OBJS}
