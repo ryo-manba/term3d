@@ -3,19 +3,16 @@
 
 # include <stdbool.h>
 # include <stdlib.h>
+# include <math.h>
 
+# define DISPLAY_HEIGHT 640
+# define DISPLAY_WIDTH 480
 typedef enum e_axis
 {
 	X_AXIS,
 	Y_AXIS,
 	Z_AXIS
 }	t_axis;
-
-typedef struct s_rotation
-{
-	enum e_axis	axis;
-	int			angle;
-}	t_rotation;
 
 typedef struct s_vector3
 {

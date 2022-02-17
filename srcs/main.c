@@ -6,7 +6,6 @@
 int main(int argc, char **argv)
 {
 	t_vertex		*model_vertexes; // 3Dモデルの頂点情報(連結リスト)
-	t_rotation		rotation;        // 回転情報(メインループで使う)
 	
 	argc = (int)argc;
 	argv = (char **)argv;
@@ -19,11 +18,19 @@ int main(int argc, char **argv)
 	// メインループ
 	while (true)
 	{
-		// キー入力によって原点を中心に 3D モデルを回転
-		rotate(model_vertexes, &rotation);
+		// 原点を中心に 3D モデルを回転
+		rotate(model_vertexes, X_AXIS, 1);
+		rotate(model_vertexes, Y_AXIS, 2);
+		rotate(model_vertexes, Z_AXIS, 3);
+
+		// 画面クリア
+		printf("\x1b[H");
 
 		// 画面に描画(平面、ボーナスはシェーダー付き)
 		draw(model_vertexes);
+
+		// 1秒待機
+		sleep(1);
 	}
 	// ループ終了
 
