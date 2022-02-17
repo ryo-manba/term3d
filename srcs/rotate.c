@@ -16,6 +16,10 @@ void	rotate(t_vertex *model_vertexes, const t_axis axis, const int degree)
 	t_vertex *index;
 	const double additional_radian = (((double)degree / 360) * 2 * M_PI);
 
+	if (degree % 360 == 0)
+	{
+		return ;
+	}
 	index = model_vertexes;
 	while (index != NULL)
 	{
