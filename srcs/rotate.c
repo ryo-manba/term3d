@@ -3,7 +3,7 @@
 static double	get_vertical_element(const double magnitude, const double original_sin, const double original_cos, const double additional_radian);
 static double	get_horizontal_element(const double magnitude, const double original_sin, const double original_cos, const double additional_radian);
 static double	get_magnitude(const t_vector3 *position);
-static void rotate_vertex(t_vertex *index, const t_axis axis, const int additional_radian);
+static void rotate_vertex(t_vertex *index, const t_axis axis, const double additional_radian);
 
 /**
  * 頂点を全て反時計回りに軸回転させる
@@ -29,7 +29,7 @@ void	rotate(t_vertex *model_vertexes, const t_axis axis, const int degree)
 }
 
 /* 頂点を反時計回りに軸回転させる */
-static void rotate_vertex(t_vertex *index, const t_axis axis, const int additional_radian)
+static void rotate_vertex(t_vertex *index, const t_axis axis, const double additional_radian)
 {
 	const double magnitude = get_magnitude(index->position);
 
