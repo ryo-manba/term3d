@@ -1,12 +1,12 @@
 #include "rotate.h"
 
-static double get_vertical_element(const double magnitude, const double original_sin, const double original_cos, const double additional_radian);
-static double get_horizontal_element(const double magnitude, const double original_sin, const double original_cos, const double additional_radian);
-static double get_magnitude(const t_vector3 *position);
-static void rotate_one(t_vertex *index, const t_axis axis, const int degree);
+static double	get_vertical_element(const double magnitude, const double original_sin, const double original_cos, const double additional_radian);
+static double	get_horizontal_element(const double magnitude, const double original_sin, const double original_cos, const double additional_radian);
+static double	get_magnitude(const t_vector3 *position);
+static void rotate_vertex(t_vertex *index, const t_axis axis, const int additional_radian);
 
 /**
- * 座標を反時計回りに軸回転させる
+ * 頂点を全て反時計回りに軸回転させる
  * @param model_vertexes 頂点の座標
  * @param axis 回転軸
  * @param degree 角度
@@ -14,19 +14,20 @@ static void rotate_one(t_vertex *index, const t_axis axis, const int degree);
 void	rotate(t_vertex *model_vertexes, const t_axis axis, const int degree)
 {
 	t_vertex *index;
+	const double additional_radian = (((double)degree / 360) * 2 * M_PI);
 
 	index = model_vertexes;
 	while (index != NULL)
 	{
-		rotate_one(index, axis, degree);
+		rotate_vertex(index, axis, additional_radian);
 		index = index->next;
 	}
 }
 
-static void rotate_one(t_vertex *index, const t_axis axis, const int degree)
+/* 頂点を反時計回りに軸回転させる */
+static void rotate_vertex(t_vertex *index, const t_axis axis, const int additional_radian)
 {
 	const double magnitude = get_magnitude(index->position);
-	const double additional_radian = (((double)degree / 360) * 2 * M_PI);
 
 	if (axis == X_AXIS)
 	{
