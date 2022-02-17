@@ -35,18 +35,18 @@ static void rotate_vertex(t_vertex *index, const t_axis axis, const int addition
 
 	if (axis == X_AXIS)
 	{
-		index->position->y = get_vertical_element(magnitude, index->position->y, index->position->z, additional_radian);
-		index->position->z = get_horizontal_element(magnitude, index->position->y, index->position->z, additional_radian);
+		index->position->y = get_vertical_element(magnitude, index->position->y / magnitude, index->position->z / magnitude, additional_radian);
+		index->position->z = get_horizontal_element(magnitude, index->position->y / magnitude, index->position->z / magnitude, additional_radian);
 	}
 	else if (axis == Y_AXIS)
 	{
-		index->position->z = get_vertical_element(magnitude, index->position->z, index->position->x, additional_radian);
-		index->position->x = get_horizontal_element(magnitude, index->position->z, index->position->x, additional_radian);
+		index->position->z = get_vertical_element(magnitude, index->position->z / magnitude, index->position->x / magnitude, additional_radian);
+		index->position->x = get_horizontal_element(magnitude, index->position->z / magnitude, index->position->x / magnitude, additional_radian);
 	}
 	else if (axis == Z_AXIS)
 	{
-		index->position->y = get_vertical_element(magnitude, index->position->y, index->position->x, additional_radian);
-		index->position->x = get_horizontal_element(magnitude, index->position->y, index->position->x, additional_radian);
+		index->position->y = get_vertical_element(magnitude, index->position->y / magnitude, index->position->x / magnitude, additional_radian);
+		index->position->x = get_horizontal_element(magnitude, index->position->y / magnitude, index->position->x / magnitude, additional_radian);
 	}
 	else
 	{
