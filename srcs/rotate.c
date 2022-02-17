@@ -77,6 +77,6 @@ static double get_magnitude(const t_vector3 *position)
 {
 	double square_magnitude;
 
-	square_magnitude = position->x * position->x + position->y + position->y;
+	square_magnitude = position->x * position->x + position->y * position->y;
 	return (sqrt(square_magnitude)); 
 }

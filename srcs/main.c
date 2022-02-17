@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 		// 原点を中心に 3D モデルを回転
 		rotate(model_vertexes, X_AXIS, 0);
 		rotate(model_vertexes, Y_AXIS, 0);
-		rotate(model_vertexes, Z_AXIS, 1);
+		rotate(model_vertexes, Z_AXIS, 180);
 
 		// 画面クリア
 		printf("\x1b[H");
