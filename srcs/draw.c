@@ -23,7 +23,7 @@ void	draw(const t_vertex *model_vertexes)
 
 	// モデルの頂点のX, y座標の整数部のdisplayをASCII文字に上書き
 	index = (t_vertex *)model_vertexes;
-	while (model_vertexes != NULL)
+	while (index != NULL)
 	{
 		x = (int)floor(index->position->x);
 		y = (int)floor(index->position->y);
