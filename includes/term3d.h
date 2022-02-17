@@ -2,11 +2,14 @@
 # define TERM3D_H
 
 # include <stdbool.h>
+# include <stdio.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
 
 # define DISPLAY_HEIGHT 640
-# define DISPLAY_WIDTH 480
+# define DISPLAY_WIDTH 481 // \0分
+
 typedef enum e_axis
 {
 	X_AXIS,
@@ -26,5 +29,7 @@ typedef struct s_vertex
 	struct s_vector3	*position;
 	struct s_vertex		*next;
 }	t_vertex;
+
+t_vertex	*read_file(const char *file_path);
 
 #endif

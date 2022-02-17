@@ -90,20 +90,3 @@ void vt_all_free(t_vertex *vt)
 		free(tmp);
 	}
 }
-
-int	main(void)
-{
-	t_vertex	*vt;
-	t_vertex	*head;
-	vt = read_file("test.3d"); // ファイルのパスを渡す
-	head = vt;
-	while (vt)
-	{
-//		printf("vt.x = [%f]\n", vt->position->x);
-//		printf("vt.y = [%f]\n", vt->position->y);
-//		printf("vt.z = [%f]\n", vt->position->z);
-		vt = vt->next;
-	}
-	vt_all_free(head);
-	return (0);
-}
