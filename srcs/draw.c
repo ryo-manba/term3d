@@ -29,6 +29,7 @@ void	draw(const t_vertex *model_vertexes)
 		y = (int)floor(index->position->y);
 		if (y >= DISPLAY_HEIGHT || x >= DISPLAY_WIDTH)
 		{
+			index = index->next;
 			continue ;
 		}
 		display[y][x] = '.';
