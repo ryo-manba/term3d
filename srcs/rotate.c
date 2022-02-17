@@ -51,7 +51,7 @@ static double get_vertical_element(const double magnitude, const double original
  * */
 static double get_horizontal_element(const double magnitude, const double original_sin, const double original_cos, const double additional_radian)
 {
-	return (magnitude * (original_cos * cos(additional_radian) + original_sin * sin(additional_radian)));
+	return (magnitude * (original_cos * cos(additional_radian) - original_sin * sin(additional_radian)));
 }
 
 /* 原点からのベクトルの大きさを取得 */
