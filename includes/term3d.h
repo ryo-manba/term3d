@@ -32,6 +32,7 @@ typedef struct s_vector3
 typedef struct s_vertex
 {
 	struct s_vector3	*position;
+	double				magnitude;
 	struct s_vertex		*next;
 }	t_vertex;
 
