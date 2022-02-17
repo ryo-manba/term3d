@@ -13,7 +13,7 @@ static double get_magnitude(const t_vector3 *position);
 void	rotate(t_vertex *model_vertexes, const t_axis axis, const int degree)
 {
 	const double magnitude = get_magnitude(model_vertexes);
-	const double additional_radian = ((degree / 360) * 2 * M_PI);
+	const double additional_radian = (((double)degree / 360) * 2 * M_PI);
 
 	if (axis == X_AXIS)
 	{
