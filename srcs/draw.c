@@ -10,7 +10,7 @@ void	draw(const t_vertex *model_vertexes)
 
 	// displayをスペースで初期化
 	y = 0;
-	while (y < DISPLAY_HEIGHT - 1)
+	while (y < DISPLAY_HEIGHT)
 	{
 		x = 0;
 		while (x < DISPLAY_WIDTH - 1)

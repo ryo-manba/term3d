@@ -7,8 +7,9 @@
 # include <stdlib.h>
 # include <math.h>
 
-# define DISPLAY_HEIGHT 640
-# define DISPLAY_WIDTH 481 // \0分
+# define DISPLAY_HEIGHT 40
+# define DISPLAY_WIDTH 121
+# define FRAMES_PER_SECOND 60
 
 typedef enum e_axis
 {
