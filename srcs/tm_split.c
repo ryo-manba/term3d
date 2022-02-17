@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 
 static void	all_free(char **split_strs, size_t i)
 {
@@ -40,7 +41,7 @@ static size_t	get_len(char const *s, char c)
 	cnt = 0;
 	if (s[i] && s[i] != c)
 		cnt++;
-	while (i < ft_strlen(s))
+	while (i < strlen(s))
 	{
 		if (s[i] == c && s[i + 1] != c && s[i + 1])
 			cnt++;
@@ -75,7 +76,7 @@ static void	*get_split(char **split_strs, char const *s, char c)
 	return (split_strs);
 }
 
-char	**ft_split(char const *s, char c)
+char	**tm_split(char const *s, char c)
 {
 	char	**split_strs;
 	size_t	split_len;

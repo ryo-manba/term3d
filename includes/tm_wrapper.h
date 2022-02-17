@@ -9,11 +9,9 @@
 #include <ctype.h>
 #include <math.h>
 
-void *xmalloc(size_t size);
-FILE *xfopen(const char * restrict path, const char * restrict mode);
-void xfclose(FILE *stream);
+void    *xmalloc(size_t size);
+FILE    *xfopen(const char * restrict path, const char * restrict mode);
+void    xfclose(FILE *stream);
 double	xstrtod(char *nptr);
-
-void perror_exit(void);
 
 #endif

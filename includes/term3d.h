@@ -26,9 +26,9 @@ typedef enum e_input_error
 
 typedef struct s_vector3
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_vector3;
 
 typedef struct s_vertex
