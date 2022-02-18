@@ -7,16 +7,16 @@
 # include <stdlib.h>
 # include <math.h>
 
-# define DISPLAY_HEIGHT 40
+# define DISPLAY_HEIGHT 30
 # define DISPLAY_WIDTH 120
-# define EXPANSION_RATE 5
+# define EXPANSION_RATE 3
 # define ANGLE_X_PER_FRAME 0
 # define ANGLE_Y_PER_FRAME 1
 # define ANGLE_Z_PER_FRAME 0
 # define FRAMES_PER_SECOND 60
 # define CAMERA_POSITION_X 2
 # define CAMERA_POSITION_Y -5
-# define CAMERA_POSITION_Z -50
+# define CAMERA_POSITION_Z -100
 # define CAMERA_ANGLE_X 0
 # define CAMERA_ANGLE_Y 0
 # define CAMERA_ANGLE_Z 0
