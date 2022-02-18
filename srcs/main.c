@@ -26,8 +26,8 @@ int main(int argc, char **argv)
 	model_vertexes1 = read_file("./models/torus.3d");
 	model_vertexes2 = read_file("./models/torus.3d");
 
-	normalize(model_vertexes1, EXPANSION_RATE);
-	normalize(model_vertexes2, EXPANSION_RATE);
+	normalize(model_vertexes1, EXPANSION_RATE1);
+	normalize(model_vertexes2, EXPANSION_RATE2);
 
 	// メインループ
 	while (true)
