@@ -1,8 +1,10 @@
 NAME = term3d
 DIR = srcs/
 FILES = main.c \
-	draw.c \
-	draw_getdepth.c \
+	display_draw.c \
+	display_draw_getdepth.c \
+	display_print.c \
+	display_init.c \
 	move.c \
 	rotate.c \
 	normalize.c \
