@@ -1,8 +1,8 @@
-#include "draw.h"
+#include "display.h"
 #include "magnitude.h"
 #include "move.h"
 
-double draw_getdepth(t_vertex *index, t_vector3 *camera_position, t_vector3 *camera_rotation)
+double display_draw_getdepth(t_vertex *index, t_vector3 *camera_position, t_vector3 *camera_rotation)
 {
 	double		distance_display;
 	double		distance_vertex;
