@@ -2,6 +2,8 @@ NAME = term3d
 DIR = srcs/
 FILES = main.c \
 	draw.c \
+	draw_getdepth.c \
+	move.c \
 	rotate.c \
 	normalize.c \
 	magnitude.c \

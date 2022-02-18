@@ -17,6 +17,9 @@
 # define CAMERA_POSITION_X 2
 # define CAMERA_POSITION_Y -5
 # define CAMERA_POSITION_Z -50
+# define CAMERA_ANGLE_X 0
+# define CAMERA_ANGLE_Y 0
+# define CAMERA_ANGLE_Z 0
 
 typedef enum e_axis
 {
