@@ -12,8 +12,9 @@
 # define EXPANSION_RATE 3
 # define DEGREE_X_PER_FRAME 0
 # define DEGREE_Y_PER_FRAME 2
-# define DEGREE_Z_PER_FRAME 1
+# define DEGREE_Z_PER_FRAME 0
 # define FRAMES_PER_SECOND 60
+# define CAMERA_POSITION_Z -100
 
 typedef enum e_axis
 {
@@ -21,6 +22,12 @@ typedef enum e_axis
 	Y_AXIS,
 	Z_AXIS
 }	t_axis;
+
+typedef enum e_camera_mode
+{
+	PARALLEL,
+	PERSPECTIVE
+}	t_camera_mode;
 
 typedef struct s_vector3
 {

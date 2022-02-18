@@ -2,7 +2,6 @@
 #include "draw.h"
 #include "rotate.h"
 #include "normalize.h"
-#include "tweak.h"
 
 int main(int argc, char **argv)
 {
@@ -10,7 +9,6 @@ int main(int argc, char **argv)
 
 	argc = (int)argc;
 	argv = (char **)argv;
-	model_vertexes = NULL;
 
 	// コマンドライン引数で渡された 3D file のエラーチェック
 
@@ -22,9 +20,6 @@ int main(int argc, char **argv)
 	// メインループ
 	while (true)
 	{
-		// サイズを微調整
-		tweak(model_vertexes);
-
 		// 原点を中心に 3D モデルを回転
 		rotate(model_vertexes, X_AXIS, DEGREE_X_PER_FRAME);
 		rotate(model_vertexes, Y_AXIS, DEGREE_Y_PER_FRAME);
@@ -34,7 +29,7 @@ int main(int argc, char **argv)
 		printf("\x1b[H");
 
 		// 画面に描画(平面、ボーナスはシェーダー付き)
-		draw(model_vertexes);
+		draw(model_vertexes, PERSPECTIVE);
 
 		// 1秒待機
 		usleep(1000 * 1000 / FRAMES_PER_SECOND);

@@ -3,6 +3,6 @@
 
 # include "term3d.h"
 
-void	draw(const t_vertex *model_vertexes);
+void	draw(const t_vertex *model_vertexes, t_camera_mode mode);
 
 #endif

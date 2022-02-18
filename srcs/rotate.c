@@ -3,7 +3,7 @@
 static void		rotate_vertex(t_vertex *index, const t_axis axis, const double additional_radian);
 static double	get_rotatied_x(const double vector2_x, const double vector2_y, const double additional_radian);
 static double	get_rotatied_y(const double vector2_x, const double vector2_y, const double additional_radian);
-// static double	get_magnitude(const t_vector3 *position);
+static double vector2_magnitude(const double vector2_x, const double vector2_y);
 
 /**
  * 頂点を全て反時計回りに軸回転させる
@@ -31,27 +31,38 @@ void	rotate(t_vertex *model_vertexes, const t_axis axis, const int degree)
 /* 頂点を反時計回りに軸回転させる */
 static void rotate_vertex(t_vertex *index, const t_axis axis, const double additional_radian)
 {
+	double before;
+	double after;
+
 	if (axis == X_AXIS)
 	{
 		// z-y平面
+		before = vector2_magnitude(index->position->z, index->position->y);
 		index->position->z = get_rotatied_x(index->position->z, index->position->y, additional_radian);
 		index->position->y = get_rotatied_y(index->position->z, index->position->y, additional_radian);
+		after = vector2_magnitude(index->position->z, index->position->y);
+		index->position->z *= before / after;
+		index->position->y *= before / after;
 	}
 	else if (axis == Y_AXIS)
 	{
 		// x-z平面
+		before = vector2_magnitude(index->position->x, index->position->z);
 		index->position->x = get_rotatied_x(index->position->x, index->position->z, additional_radian);
 		index->position->z = get_rotatied_y(index->position->x, index->position->z, additional_radian);
-	}
-	else if (axis == Z_AXIS)
-	{
-		// x-y平面
-		index->position->x = get_rotatied_x(index->position->x, index->position->y, additional_radian);
-		index->position->y = get_rotatied_y(index->position->x, index->position->y, additional_radian);
+		after = vector2_magnitude(index->position->x, index->position->z);
+		index->position->x *= before / after;
+		index->position->z *= before / after;
 	}
 	else
 	{
-		return ;
+		// x-y平面
+		before = vector2_magnitude(index->position->x, index->position->y);
+		index->position->x = get_rotatied_x(index->position->x, index->position->y, additional_radian);
+		index->position->y = get_rotatied_y(index->position->x, index->position->y, additional_radian);
+		after = vector2_magnitude(index->position->x, index->position->y);
+		index->position->x *= before / after;
+		index->position->y *= before / after;
 	}
 }
 
@@ -76,10 +87,10 @@ static double get_rotatied_x(const double vector2_x, const double vector2_y, con
 }
 
 /* 原点からのベクトルの大きさを取得 */
-// static double get_magnitude(const t_vector3 *position)
-// {
-// 	double square_magnitude;
+static double vector2_magnitude(const double vector2_x, const double vector2_y)
+{
+	double square_magnitude;
 
-// 	square_magnitude = position->x * position->x + position->y * position->y;
-// 	return (sqrt(square_magnitude)); 
-// }
+	square_magnitude = vector2_x * vector2_x + vector2_y * vector2_y;
+	return (sqrt(square_magnitude)); 
+}
