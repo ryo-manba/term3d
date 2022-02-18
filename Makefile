@@ -2,9 +2,11 @@ NAME = term3d
 DIR = srcs/
 FILES = main.c \
 	draw.c \
-	tweak.c \
+	draw_getdepth.c \
+	move.c \
 	rotate.c \
 	normalize.c \
+	magnitude.c \
 	tm_file_read.c \
 	tm_print_error_exit.c \
 	tm_split.c \
