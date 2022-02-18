@@ -3,6 +3,6 @@
 
 # include "term3d.h"
 
-void	rotate(t_vertex *model_vertexes, const t_axis axis, const int angle);
+void	rotate(t_vertex *model_vertexes, const t_axis axis, const int angle, const t_vector3 *pivot);
 
 #endif
