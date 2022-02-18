@@ -7,9 +7,9 @@
 # include <stdlib.h>
 # include <math.h>
 
-# define DISPLAY_HEIGHT 30
-# define DISPLAY_WIDTH 81
-# define EXPANSION_RATE 3
+# define DISPLAY_HEIGHT 40
+# define DISPLAY_WIDTH 120
+# define EXPANSION_RATE 5
 # define ANGLE_X_PER_FRAME 0
 # define ANGLE_Y_PER_FRAME 1
 # define ANGLE_Z_PER_FRAME 0
