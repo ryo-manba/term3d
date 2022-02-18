@@ -3,6 +3,7 @@
 static void init(char display[][DISPLAY_WIDTH]);
 static void put(char display[][DISPLAY_WIDTH], const t_vertex *model_vertexes, t_camera_mode mode);
 static void print(char display[][DISPLAY_WIDTH]);
+static int	get_display_position(const t_axis axis, const t_camera_mode mode, t_vertex *index);
 
 /* 画面を描画 */
 void	draw(const t_vertex *model_vertexes, t_camera_mode mode)
@@ -12,7 +13,7 @@ void	draw(const t_vertex *model_vertexes, t_camera_mode mode)
 	// displayをスペースで初期化
 	init(display);
 
-	// モデルの頂点のX, y座標の整数部のdisplayをASCII文字に上書き
+	// モデルのパースをかけてから,頂点のX, yの小数点を切り捨ててディスプレイの二次元配列に格納
 	put(display, model_vertexes, mode);
 
 	// displayを出力
@@ -47,16 +48,8 @@ static void put(char display[][DISPLAY_WIDTH], const t_vertex *model_vertexes, t
 	index = (t_vertex *)model_vertexes;
 	while (index != NULL)
 	{
-		if (mode == PERSPECTIVE)
-		{
-			x = (int)floor(index->position->x * CAMERA_POSITION_Z / (CAMERA_POSITION_Z - index->position->z)) + DISPLAY_WIDTH / 2;
-			y = (int)floor(index->position->y * CAMERA_POSITION_Z / (CAMERA_POSITION_Z - index->position->z)) + DISPLAY_HEIGHT / 2;
-		}
-		else
-		{
-			x = (int)floor(index->position->x) + DISPLAY_WIDTH / 2;
-			y = (int)floor(index->position->y) + DISPLAY_HEIGHT / 2;
-		}
+		x = get_display_position(X_AXIS, mode, index);
+		y = get_display_position(Y_AXIS, mode, index);
 		if (y >= DISPLAY_HEIGHT || x >= DISPLAY_WIDTH || y < 0 || x < 0)
 		{
 			index = index->next;
@@ -64,6 +57,32 @@ static void put(char display[][DISPLAY_WIDTH], const t_vertex *model_vertexes, t
 		}
 		display[y][x] = '.';
 		index = index->next;
+	}
+}
+
+static int	get_display_position(const t_axis axis, const t_camera_mode mode, t_vertex *index)
+{
+	if (mode == PERSPECTIVE)
+	{
+		if (axis == X_AXIS)
+			return ((int)floor(index->position->x
+					* CAMERA_POSITION_Z
+					/ (CAMERA_POSITION_Z - index->position->z))
+					+ DISPLAY_WIDTH / 2 // 画面中央に移動
+					- CAMERA_POSITION_X); // カメラの分移動
+		else
+			return ((int)floor(index->position->y
+					* CAMERA_POSITION_Z
+					/ (CAMERA_POSITION_Z - index->position->z))
+					+ DISPLAY_HEIGHT / 2 // 画面中央に移動
+					- CAMERA_POSITION_Y); // カメラの分移動
+	}
+	else
+	{
+		if (axis == X_AXIS)
+			return ((int)floor(index->position->x) + DISPLAY_WIDTH / 2);
+		else
+			return ((int)floor(index->position->y) + DISPLAY_HEIGHT / 2);
 	}
 }
 

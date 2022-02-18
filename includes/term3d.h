@@ -10,11 +10,13 @@
 # define DISPLAY_HEIGHT 30
 # define DISPLAY_WIDTH 81
 # define EXPANSION_RATE 3
-# define DEGREE_X_PER_FRAME 0
-# define DEGREE_Y_PER_FRAME 2
-# define DEGREE_Z_PER_FRAME 0
+# define ANGLE_X_PER_FRAME 0
+# define ANGLE_Y_PER_FRAME 1
+# define ANGLE_Z_PER_FRAME 0
 # define FRAMES_PER_SECOND 60
-# define CAMERA_POSITION_Z -100
+# define CAMERA_POSITION_X 2
+# define CAMERA_POSITION_Y -5
+# define CAMERA_POSITION_Z -50
 
 typedef enum e_axis
 {

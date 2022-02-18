@@ -21,9 +21,9 @@ int main(int argc, char **argv)
 	while (true)
 	{
 		// 原点を中心に 3D モデルを回転
-		rotate(model_vertexes, X_AXIS, DEGREE_X_PER_FRAME);
-		rotate(model_vertexes, Y_AXIS, DEGREE_Y_PER_FRAME);
-		rotate(model_vertexes, Z_AXIS, DEGREE_Z_PER_FRAME);
+		rotate(model_vertexes, X_AXIS, ANGLE_X_PER_FRAME);
+		rotate(model_vertexes, Y_AXIS, ANGLE_Y_PER_FRAME);
+		rotate(model_vertexes, Z_AXIS, ANGLE_Z_PER_FRAME);
 
 		// 画面クリア
 		printf("\x1b[H");
