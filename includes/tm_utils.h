@@ -5,7 +5,9 @@
 #include <stdlib.h>
 #include "term3d.h"
 
+
 void	print_error_exit(const char *msg);
+char	*tm_strjoin(char *s1, char *s2);
 char	**tm_split(char const *s, char c);
 
 /* tm_vector_utils */

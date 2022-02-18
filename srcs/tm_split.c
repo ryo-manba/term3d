@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include "tm_wrapper.h"
 
 static void	all_free(char **split_strs, size_t i)
 {
@@ -19,7 +20,7 @@ static char	*ft_strcpy(char const *s, char c)
 	i = 0;
 	while (s[i] && s[i] != c)
 		i++;
-	dest = (char *)malloc(sizeof(char) * (i + 1));
+	dest = (char *)xmalloc(sizeof(char) * (i + 1));
 	if (dest == NULL)
 		return (NULL);
 	i = 0;
@@ -84,7 +85,7 @@ char	**tm_split(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	split_len = get_len(s, c);
-	split_strs = (char **)malloc(sizeof(char *) * (split_len + 1));
+	split_strs = (char **)xmalloc(sizeof(char *) * (split_len + 1));
 	if (split_strs == NULL)
 		return (NULL);
 	get_split(split_strs, s, c);

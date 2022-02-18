@@ -10,6 +10,7 @@
 #include <math.h>
 
 void    *xmalloc(size_t size);
+char	*xstrdup(const char *s);
 FILE    *xfopen(const char * restrict path, const char * restrict mode);
 void    xfclose(FILE *stream);
 double	xstrtod(char *nptr);
