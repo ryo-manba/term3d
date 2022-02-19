@@ -14,7 +14,7 @@ t_vector3	*tm_new_vector(const double x, const double y, const double z)
 
 t_vertex	*tm_new_vertex(t_vector3 *vec)
 {
-	t_vertex *new;
+	t_vertex	*new;
 
 	new = (t_vertex *)xmalloc(sizeof(t_vertex));
 	new->position = vec;
