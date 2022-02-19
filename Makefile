@@ -9,9 +9,11 @@ FILES = main.c \
 	rotate.c \
 	normalize.c \
 	magnitude.c \
+	tm_create_model_vertexes.c \
 	tm_file_read.c \
 	tm_print_error_exit.c \
 	tm_split.c \
+	tm_strjoin.c \
 	tm_vector_utils.c \
 	tm_wrapper.c
 SRCS = ${addprefix ${DIR},${FILES}}
