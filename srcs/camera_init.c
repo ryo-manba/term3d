@@ -20,5 +20,6 @@ t_camera	*camera_init(void)
 	}
 	camera->position = position;
 	camera->horizontal_angle = CAMERA_ANGLE_HORIZONTAL;
+	camera->mode = DEFAULT_CAMERA_MODE;
 	return (camera);
 }
