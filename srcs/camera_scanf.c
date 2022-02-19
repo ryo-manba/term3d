@@ -18,9 +18,9 @@ bool	camera_scanf(t_camera *camera, int *input_char, bool *input_flag)
 	else if (*input_char == 'e')
 		camera->position->y++;
 	else if (*input_char == 'j')
-		camera->horizontal_angle--;
-	else if (*input_char == 'l')
 		camera->horizontal_angle++;
+	else if (*input_char == 'l')
+		camera->horizontal_angle--;
 	else
 		return (false);
 	*input_flag = true;
