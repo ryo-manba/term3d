@@ -39,4 +39,7 @@ fclean: clean
 
 re: fclean all
 
+test: $(NAME)
+	./test.sh
+
 .PHONY: all clean fclean re
