@@ -5,6 +5,10 @@
 #include "tm_utils.h"
 #include "tm_create_model_vertexes.h"
 #include <string.h>
+#include <termios.h>
+#include <fcntl.h>
+
+static void	set_non_blocking_stdin(void);
 
 static char	check_file_extensions(const char *filename)
 {
@@ -32,6 +36,8 @@ int main(int argc, char **argv)
 	t_vector3		pivot1;
 	t_vector3		pivot2;
 	t_camera		*camera;
+	int				input_c;
+	bool			input_flag;
 
 	if (argc != 2)
 	{
@@ -45,6 +51,16 @@ int main(int argc, char **argv)
 	// 拡張子が obj か 3d 以外ならexitする
 	file_type = check_file_extensions(file_name);
 
+	// コマンドライン引数で渡された 3D file のエラーチェック
+	file_data = read_file(file_name);
+
+	// 標準入力ノンブロッキング
+	set_non_blocking_stdin();
+
+	// 入力フラグ初期化
+	input_flag = false;
+
+	// ピボット初期化
 	pivot1.x = OBJ1_PIVOT_X;
 	pivot1.y = OBJ1_PIVOT_Y;
 	pivot1.z = OBJ1_PIVOT_Z;
@@ -55,20 +71,24 @@ int main(int argc, char **argv)
 	// カメラ初期化
 	camera = camera_init();
 
-	// コマンドライン引数で渡された 3D file のエラーチェック
-	file_data = read_file(file_name);
-
 	// コマンドライン引数で渡された 3D file を構造体に格納
 	model_vertexes1 = create_model_vertexes(file_data, file_type);
 	model_vertexes2 = create_model_vertexes(file_data, file_type);
 
+	// 3Dモデルのスケールを既定値に
 	vertex_expandall(model_vertexes1, OBJ1_EXPANSION_RATE);
 	vertex_expandall(model_vertexes2, OBJ2_EXPANSION_RATE);
 
 	// メインループ
 	while (true)
 	{
-		// 原点を中心に 3D モデルを回転
+		// 入力をとってカメラ制御。EOFがきたらbreak
+		if (camera_scanf(camera, &input_c, &input_flag))
+		{
+			break ;
+		}
+
+		// ピボットを中心に 3D モデルを回転
 		vertex_rotateall(model_vertexes1, X_AXIS, OBJ1_ROTATE_SPEED_X, &pivot1);
 		vertex_rotateall(model_vertexes1, Y_AXIS, OBJ1_ROTATE_SPEED_Y, &pivot1);
 		vertex_rotateall(model_vertexes1, Z_AXIS, OBJ1_ROTATE_SPEED_Z, &pivot1);
@@ -83,17 +103,30 @@ int main(int argc, char **argv)
 		display_init(display);
 
 		// 画面に描画
-		display_draw(display, model_vertexes1, PERSPECTIVE, camera);
-		display_draw(display, model_vertexes2, PERSPECTIVE, camera);
+		display_draw(display, model_vertexes1, camera);
+		display_draw(display, model_vertexes2, camera);
 
 		// 画面出力
 		display_print(display);
 
-		// 1秒待機
+		// 1フレーム待機
 		usleep(1000 * 1000 / FRAMES_PER_SECOND);
 	}
 	// ループ終了
 
 	// 構造体を解放
+	camera_destory(camera);
+
 	return (0);
+}
+
+/* 標準入力をノンブロッキング */
+static void	set_non_blocking_stdin(void)
+{
+	struct termios setting;
+
+	tcgetattr(STDIN_FILENO, &setting);
+	setting.c_lflag &= ~(ECHO | ICANON);
+	tcsetattr(STDIN_FILENO, TCSANOW, &setting);
+	fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
 }

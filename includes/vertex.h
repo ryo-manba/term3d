@@ -1,5 +1,5 @@
-#ifndef ROTATE_H
-# define ROTATE_H
+#ifndef VERTEX_H
+# define VERTEX_H
 
 # include "term3d.h"
 
