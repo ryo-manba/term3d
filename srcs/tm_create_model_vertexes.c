@@ -32,6 +32,8 @@ static void free_double_pointer(char **dp)
  * # コメント
  * mtllib マテリアルファイル名
  * g グループ名
+ * o オブジェクト名
+ * s スムーズシェーディングの切り替え
  * usemtl マテリアル名
  * v  x成分値 y成分値 z成分値
  * vt x成分値 y成分値
