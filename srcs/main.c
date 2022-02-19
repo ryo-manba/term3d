@@ -8,8 +8,6 @@
 #include <termios.h>
 #include <fcntl.h>
 
-static void	set_non_blocking_stdin(void);
-
 static char	check_file_extensions(const char *filename)
 {
 	char	*p;
@@ -53,9 +51,6 @@ int main(int argc, char **argv)
 
 	// コマンドライン引数で渡された 3D file のエラーチェック
 	file_data = read_file(file_name);
-
-	// 標準入力ノンブロッキング
-	set_non_blocking_stdin();
 
 	// 入力フラグ初期化
 	input_flag = false;
@@ -118,16 +113,4 @@ int main(int argc, char **argv)
 	camera_destory(camera);
 
 	return (0);
-}
-
-/* 標準入力をノンブロッキング */
-static void	set_non_blocking_stdin(void)
-{
-	return ;
-	struct termios setting;
-
-	tcgetattr(STDIN_FILENO, &setting);
-	setting.c_lflag &= ~(ECHO | ICANON);
-	tcsetattr(STDIN_FILENO, TCSANOW, &setting);
-	fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
 }
