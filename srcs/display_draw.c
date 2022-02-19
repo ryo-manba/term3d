@@ -1,6 +1,6 @@
 #include "display.h"
 
-static int	get_display_position(const t_axis axis, const t_vertex *index, const t_camera *camera);
+static int	get_screen_position(const t_axis axis, const t_vertex *index, const t_camera *camera);
 
 /* 画面を描画 */
 void	display_draw(char display[][DISPLAY_WIDTH], const t_vertex *model_vertexes, const t_camera *camera)
@@ -12,8 +12,8 @@ void	display_draw(char display[][DISPLAY_WIDTH], const t_vertex *model_vertexes,
 	index = (t_vertex *)model_vertexes;
 	while (index != NULL)
 	{
-		x = get_display_position(X_AXIS, index, camera);
-		y = get_display_position(Y_AXIS, index, camera);
+		x = get_screen_position(X_AXIS, index, camera);
+		y = get_screen_position(Y_AXIS, index, camera);
 		if (y >= DISPLAY_HEIGHT || x >= DISPLAY_WIDTH || y < 0 || x < 0)
 		{
 			index = index->next;
@@ -24,7 +24,7 @@ void	display_draw(char display[][DISPLAY_WIDTH], const t_vertex *model_vertexes,
 	}
 }
 
-static int	get_display_position(const t_axis axis, const t_vertex *index, const t_camera *camera)
+static int	get_screen_position(const t_axis axis, const t_vertex *index, const t_camera *camera)
 {
 	if (axis == X_AXIS)
 		return ((int)display_draw_getscreenpos(index->position->x,
