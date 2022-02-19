@@ -36,6 +36,8 @@ int main(int argc, char **argv)
 	t_vector3		pivot1;
 	t_vector3		pivot2;
 	t_camera		*camera;
+	int				input_c;
+	bool			input_flag;
 
 	if (argc != 2)
 	{
@@ -55,6 +57,9 @@ int main(int argc, char **argv)
 	// 標準入力ノンブロッキング
 	set_non_blocking_stdin();
 
+	// 入力フラグ初期化
+	input_flag = false;
+
 	// ピボット初期化
 	pivot1.x = OBJ1_PIVOT_X;
 	pivot1.y = OBJ1_PIVOT_Y;
@@ -70,14 +75,15 @@ int main(int argc, char **argv)
 	model_vertexes1 = create_model_vertexes(file_data, file_type);
 	model_vertexes2 = create_model_vertexes(file_data, file_type);
 
+	// 3Dモデルのスケールをデフォルト値に
 	vertex_expandall(model_vertexes1, OBJ1_EXPANSION_RATE);
 	vertex_expandall(model_vertexes2, OBJ2_EXPANSION_RATE);
 
 	// メインループ
 	while (true)
 	{
-		// 入力をとって
-		if (camera_scanf(camera))
+		// 入力をとってカメラ制御。EOFがきたらbreak
+		if (camera_scanf(camera, &input_c, &input_flag))
 		{
 			break ;
 		}
