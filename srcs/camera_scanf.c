@@ -2,6 +2,7 @@
 
 bool	camera_scanf(t_camera *camera, int *input_char, bool *input_flag)
 {
+	return (false);
 	*input_char = getchar();
 	// if (*input_char == EOF && *input_flag == true)
 	// 	return (true);
