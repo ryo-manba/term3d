@@ -9,21 +9,25 @@
 
 # define DISPLAY_HEIGHT 40
 # define DISPLAY_WIDTH 120
-# define EXPANSION_RATE1 3
-# define EXPANSION_RATE2 4
-# define ANGLE1_X_PER_FRAME 1
-# define ANGLE1_Y_PER_FRAME 1
-# define ANGLE1_Z_PER_FRAME 0
-# define ANGLE2_X_PER_FRAME 0
-# define ANGLE2_Y_PER_FRAME 2
-# define ANGLE2_Z_PER_FRAME 1
 # define FRAMES_PER_SECOND 60
-# define CAMERA_POSITION_X 20
+# define OBJ1_EXPANSION_RATE 3
+# define OBJ2_EXPANSION_RATE 4
+# define OBJ1_ROTATE_SPEED_X 1
+# define OBJ1_ROTATE_SPEED_Y 1
+# define OBJ1_ROTATE_SPEED_Z 0
+# define OBJ2_ROTATE_SPEED_X 0
+# define OBJ2_ROTATE_SPEED_Y 2
+# define OBJ2_ROTATE_SPEED_Z 1
+# define OBJ1_PIVOT_X -15
+# define OBJ1_PIVOT_Y -2
+# define OBJ1_PIVOT_Z -1
+# define OBJ2_PIVOT_X 15
+# define OBJ2_PIVOT_Y 2
+# define OBJ2_PIVOT_Z 1
+# define CAMERA_POSITION_X 20 // 固定
 # define CAMERA_POSITION_Y -5
-# define CAMERA_POSITION_Z -100
-# define CAMERA_ANGLE_X 0
-# define CAMERA_ANGLE_Y 0
-# define CAMERA_ANGLE_Z 0
+# define CAMERA_POSITION_Z -100 // 固定
+# define CAMERA_ANGLE_HORIZONTAL 0
 # define FILE_TYPE_THREED ','
 # define FILE_TYPE_OBJ ' '
 
@@ -53,6 +57,12 @@ typedef struct s_vertex
 	double				magnitude;
 	struct s_vertex		*next;
 }	t_vertex;
+
+typedef struct s_camera
+{
+	t_vector3	*position;
+	double		horizontal_angle;
+}	t_camera;
 
 char	*read_file(const char *file_path);
 

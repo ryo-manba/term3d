@@ -1,7 +1,7 @@
 #include "term3d.h"
 #include "display.h"
-#include "rotate.h"
-#include "normalize.h"
+#include "vertex.h"
+#include "camera.h"
 #include "tm_utils.h"
 #include "tm_create_model_vertexes.h"
 #include <string.h>
@@ -28,9 +28,10 @@ int main(int argc, char **argv)
 	char			*file_name;
 	t_vertex		*model_vertexes1; // 3Dモデルの頂点情報(連結リスト)
 	t_vertex		*model_vertexes2; // 3Dモデルの頂点情報(連結リスト)
+	char			display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 	t_vector3		pivot1;
 	t_vector3		pivot2;
-	char display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
+	t_camera		*camera;
 
 	if (argc != 2)
 	{
@@ -44,12 +45,15 @@ int main(int argc, char **argv)
 	// 拡張子が obj か 3d 以外ならexitする
 	file_type = check_file_extensions(file_name);
 
-	pivot1.x = -15;
-	pivot1.y = -2;
-	pivot1.z = -1;
-	pivot2.x = 15;
-	pivot2.y = 2;
-	pivot2.z = 1;
+	pivot1.x = OBJ1_PIVOT_X;
+	pivot1.y = OBJ1_PIVOT_Y;
+	pivot1.z = OBJ1_PIVOT_Z;
+	pivot2.x = OBJ2_PIVOT_X;
+	pivot2.y = OBJ2_PIVOT_Y;
+	pivot2.z = OBJ2_PIVOT_Z;
+
+	// カメラ初期化
+	camera = camera_init();
 
 	// コマンドライン引数で渡された 3D file のエラーチェック
 	file_data = read_file(file_name);
@@ -58,19 +62,19 @@ int main(int argc, char **argv)
 	model_vertexes1 = create_model_vertexes(file_data, file_type);
 	model_vertexes2 = create_model_vertexes(file_data, file_type);
 
-	normalize(model_vertexes1, EXPANSION_RATE1);
-	normalize(model_vertexes2, EXPANSION_RATE2);
+	vertex_expandall(model_vertexes1, OBJ1_EXPANSION_RATE);
+	vertex_expandall(model_vertexes2, OBJ2_EXPANSION_RATE);
 
 	// メインループ
 	while (true)
 	{
 		// 原点を中心に 3D モデルを回転
-		rotate(model_vertexes1, X_AXIS, ANGLE1_X_PER_FRAME, &pivot1);
-		rotate(model_vertexes1, Y_AXIS, ANGLE1_Y_PER_FRAME, &pivot1);
-		rotate(model_vertexes1, Z_AXIS, ANGLE1_Z_PER_FRAME, &pivot1);
-		rotate(model_vertexes2, X_AXIS, ANGLE2_X_PER_FRAME, &pivot2);
-		rotate(model_vertexes2, Y_AXIS, ANGLE2_Y_PER_FRAME, &pivot2);
-		rotate(model_vertexes2, Z_AXIS, ANGLE2_Z_PER_FRAME, &pivot2);
+		vertex_rotateall(model_vertexes1, X_AXIS, OBJ1_ROTATE_SPEED_X, &pivot1);
+		vertex_rotateall(model_vertexes1, Y_AXIS, OBJ1_ROTATE_SPEED_Y, &pivot1);
+		vertex_rotateall(model_vertexes1, Z_AXIS, OBJ1_ROTATE_SPEED_Z, &pivot1);
+		vertex_rotateall(model_vertexes2, X_AXIS, OBJ2_ROTATE_SPEED_X, &pivot2);
+		vertex_rotateall(model_vertexes2, Y_AXIS, OBJ2_ROTATE_SPEED_Y, &pivot2);
+		vertex_rotateall(model_vertexes2, Z_AXIS, OBJ2_ROTATE_SPEED_Z, &pivot2);
 
 		// 画面クリア
 		printf("\x1b[H");
@@ -79,16 +83,14 @@ int main(int argc, char **argv)
 		display_init(display);
 
 		// 画面に描画
-		display_draw(display, model_vertexes1, PERSPECTIVE);
-		display_draw(display, model_vertexes2, PERSPECTIVE);
+		display_draw(display, model_vertexes1, PERSPECTIVE, camera);
+		display_draw(display, model_vertexes2, PERSPECTIVE, camera);
 
 		// 画面出力
 		display_print(display);
 
 		// 1秒待機
 		usleep(1000 * 1000 / FRAMES_PER_SECOND);
-
-		//return (0);
 	}
 	// ループ終了
 
