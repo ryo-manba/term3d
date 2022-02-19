@@ -109,6 +109,7 @@ int main(int argc, char **argv)
 	// ループ終了
 
 	// 構造体を解放
+	camera_destory(camera);
 
 	return (0);
 }

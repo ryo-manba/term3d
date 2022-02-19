@@ -5,7 +5,6 @@ bool	camera_scanf(t_camera *camera)
 	int	c;
 
 	return (false);
-	c = 0;
 	c = getchar();
 	if (c == EOF)
 		return (true);
@@ -19,4 +18,5 @@ bool	camera_scanf(t_camera *camera)
 		camera->horizontal_angle--;
 	else
 		return (false);
+	return (false);
 }
