@@ -3,7 +3,7 @@ DIR = srcs/
 FILES = main.c \
 	camera_init.c \
 	display_draw.c \
-	display_draw_getdepth.c \
+	display_draw_getscreenpos.c \
 	display_print.c \
 	display_init.c \
 	vertex_rotate.c \
