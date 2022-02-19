@@ -13,6 +13,7 @@ FILES = main.c \
 	vertex_expandall.c \
 	vertex_magnitude.c \
 	tm_create_model_vertexes.c \
+	tm_free_double_pointer.c \
 	tm_read_file.c \
 	tm_print_error_exit.c \
 	tm_split.c \
