@@ -24,6 +24,8 @@
 # define CAMERA_ANGLE_X 0
 # define CAMERA_ANGLE_Y 0
 # define CAMERA_ANGLE_Z 0
+# define FILE_TYPE_THREED ','
+# define FILE_TYPE_OBJ ' '
 
 typedef enum e_axis
 {
@@ -52,6 +54,6 @@ typedef struct s_vertex
 	struct s_vertex		*next;
 }	t_vertex;
 
-t_vertex	*read_file(const char *file_path);
+char	*read_file(const char *file_path);
 
 #endif

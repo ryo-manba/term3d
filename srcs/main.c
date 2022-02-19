@@ -2,17 +2,41 @@
 #include "display.h"
 #include "rotate.h"
 #include "normalize.h"
+#include "tm_utils.h"
+#include "tm_create_model_vertexes.h"
+#include <string.h>
+
+static char	check_file_extensions(const char *filename)
+{
+	char	*p;
+
+	p = strrchr(filename, '.');
+	if (p == NULL)
+		print_error_exit("Invalid extension");
+	else if (strcmp(p, ".3d") == 0)
+		return (FILE_TYPE_THREED);
+	else if (strcmp(p, ".obj") == 0)
+		return (FILE_TYPE_OBJ);
+	print_error_exit("Invalid extension");
+	return ('*');
+}
 
 int main(int argc, char **argv)
 {
+	t_vertex		*model_vertexes; // 3Dモデルの頂点情報(連結リスト)
+	char			*file_data;
+	char			file_type;
 	t_vertex		*model_vertexes1; // 3Dモデルの頂点情報(連結リスト)
 	t_vertex		*model_vertexes2; // 3Dモデルの頂点情報(連結リスト)
 	t_vector3		pivot1;
 	t_vector3		pivot2;
 	char display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 
-	argc = (int)argc;
-	argv = (char **)argv;
+	if (argc != 2)
+		print_error_exit("Wrong arguments");
+//	file_type = check_file_extensions(argv[1]); // .obj or .3d以外ならexit
+  file_type = ("./models/torus.3d");
+  
 	pivot1.x = -15;
 	pivot1.y = -2;
 	pivot1.z = -1;
@@ -21,10 +45,13 @@ int main(int argc, char **argv)
 	pivot2.z = 1;
 
 	// コマンドライン引数で渡された 3D file のエラーチェック
+//	file_data = read_file(argv[1]);
+   file_data = read_file("./models/torus.3d");
 
 	// コマンドライン引数で渡された 3D file を構造体に格納
-	model_vertexes1 = read_file("./models/torus.3d");
-	model_vertexes2 = read_file("./models/torus.3d");
+//	model_vertexes = create_model_vertexes(file_data, file_type);
+	model_vertexes1 = create_model_vertexes("./models/torus.3d", file_type);
+	model_vertexes2 = create_model_vertexes("./models/torus.3d", file_type);
 
 	normalize(model_vertexes1, EXPANSION_RATE1);
 	normalize(model_vertexes2, EXPANSION_RATE2);

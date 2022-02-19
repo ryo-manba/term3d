@@ -1,9 +1,9 @@
-#include "../includes/tm_wrapper.h"
-#include "../includes/tm_utils.h"
+#include "tm_wrapper.h"
+#include "tm_utils.h"
 
-void *xmalloc(size_t size)
+void	*xmalloc(size_t size)
 {
-	void *p;
+	void	*p;
 
 	p = malloc(size);
 	if (!p)
@@ -11,9 +11,9 @@ void *xmalloc(size_t size)
 	return (p);
 }
 
-FILE *xfopen(const char * restrict path, const char * restrict mode)
+FILE	*xfopen(const char *path, const char *mode)
 {
-	FILE *fp;
+	FILE	*fp;
 
 	fp = fopen(path, mode);
 	if (!fp)
@@ -21,26 +21,36 @@ FILE *xfopen(const char * restrict path, const char * restrict mode)
 	return (fp);
 }
 
-void xfclose(FILE *stream)
+void	xfclose(FILE *stream)
 {
 	if (fclose(stream) != 0)
 		print_error_exit(NULL);
 }
 
-double	xstrtod(char *nptr)
+double	xstrtod(char *s)
 {
-	double	f;
-	char	*endptr;
+	double	d;
+	char	*err;
 
-	if (!nptr)
+	if (!s)
 		print_error_exit(NULL);
-	f = strtod(nptr, &endptr);
+	d = strtod(s, &err);
 	if (errno != ERANGE)
 	{
-		if (*endptr != '\0') // 数値以外の文字が入っている場合
+		if (*err != '\0')
 			print_error_exit(NULL);
 	}
-	else if (f == HUGE_VAL) // doubleで扱える範囲を超えた場合
+	else if (d == HUGE_VAL)
 		print_error_exit(NULL);
-	return (f);
+	return (d);
+}
+
+char	*xstrdup(const char *s)
+{
+	char	*copy;
+
+	copy = strdup(s);
+	if (copy == NULL)
+		print_error_exit(NULL);
+	return (copy);
 }
