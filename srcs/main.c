@@ -75,7 +75,7 @@ int main(int argc, char **argv)
 	model_vertexes1 = create_model_vertexes(file_data, file_type);
 	model_vertexes2 = create_model_vertexes(file_data, file_type);
 
-	// 3Dモデルのスケールをデフォルト値に
+	// 3Dモデルのスケールを既定値に
 	vertex_expandall(model_vertexes1, OBJ1_EXPANSION_RATE);
 	vertex_expandall(model_vertexes2, OBJ2_EXPANSION_RATE);
 
@@ -88,7 +88,7 @@ int main(int argc, char **argv)
 			break ;
 		}
 
-		// 原点を中心に 3D モデルを回転
+		// ピボットを中心に 3D モデルを回転
 		vertex_rotateall(model_vertexes1, X_AXIS, OBJ1_ROTATE_SPEED_X, &pivot1);
 		vertex_rotateall(model_vertexes1, Y_AXIS, OBJ1_ROTATE_SPEED_Y, &pivot1);
 		vertex_rotateall(model_vertexes1, Z_AXIS, OBJ1_ROTATE_SPEED_Z, &pivot1);
@@ -109,7 +109,7 @@ int main(int argc, char **argv)
 		// 画面出力
 		display_print(display);
 
-		// 1秒待機
+		// 1フレーム待機
 		usleep(1000 * 1000 / FRAMES_PER_SECOND);
 	}
 	// ループ終了
