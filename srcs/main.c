@@ -34,7 +34,8 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		file_name = "./models/torus.3d";
+//		file_name = "./models/torus.3d";
+		file_name = "./models/torus_triangle.obj";
 //		print_error_exit("Wrong arguments");
 	}
 	else
