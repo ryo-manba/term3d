@@ -2,7 +2,6 @@
 CYAN="\033[36m"
 RESET="\033[0m"
 
-
 find ./models/invalid_files/* | sort > tempfile
 echo "---INVALID FILE TEST---"
 while read line
