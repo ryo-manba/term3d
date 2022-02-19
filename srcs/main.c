@@ -5,8 +5,6 @@
 #include "tm_utils.h"
 #include "tm_create_model_vertexes.h"
 #include <string.h>
-#include <termios.h>
-#include <fcntl.h>
 
 static char	check_file_extensions(const char *filename)
 {

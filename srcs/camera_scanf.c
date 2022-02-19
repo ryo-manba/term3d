@@ -1,4 +1,6 @@
 #include "camera.h"
+#include <termios.h>
+#include <fcntl.h>
 
 static void	set_non_blocking_stdin(void);
 
