@@ -1,6 +1,4 @@
 #include "display.h"
-#include "magnitude.h"
-#include "move.h"
 
 double display_draw_getdepth(t_vertex *index, t_vector3 *camera_position, t_vector3 *camera_rotation)
 {

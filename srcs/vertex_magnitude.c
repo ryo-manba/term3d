@@ -1,7 +1,7 @@
-#include "magnitude.h"
+#include "vertex.h"
 
 /* 原点からのベクトルの大きさを取得 */
-double magnitude(const t_vector3 *position)
+double vertex_magnitude(const t_vector3 *position)
 {
 	double hypotenuse_xy_squared;
 	double hypotenuse_xyz_squared;

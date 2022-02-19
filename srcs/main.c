@@ -1,7 +1,6 @@
 #include "term3d.h"
 #include "display.h"
-#include "rotate.h"
-#include "normalize.h"
+#include "vertex.h"
 #include "tm_utils.h"
 #include "tm_create_model_vertexes.h"
 #include <string.h>
@@ -57,19 +56,19 @@ int main(int argc, char **argv)
 	model_vertexes1 = create_model_vertexes(file_data, file_type);
 	model_vertexes2 = create_model_vertexes(file_data, file_type);
 
-	normalize(model_vertexes1, EXPANSION_RATE1);
-	normalize(model_vertexes2, EXPANSION_RATE2);
+	vertex_expandall(model_vertexes1, EXPANSION_RATE1);
+	vertex_expandall(model_vertexes2, EXPANSION_RATE2);
 
 	// メインループ
 	while (true)
 	{
 		// 原点を中心に 3D モデルを回転
-		rotate(model_vertexes1, X_AXIS, ANGLE1_X_PER_FRAME, &pivot1);
-		rotate(model_vertexes1, Y_AXIS, ANGLE1_Y_PER_FRAME, &pivot1);
-		rotate(model_vertexes1, Z_AXIS, ANGLE1_Z_PER_FRAME, &pivot1);
-		rotate(model_vertexes2, X_AXIS, ANGLE2_X_PER_FRAME, &pivot2);
-		rotate(model_vertexes2, Y_AXIS, ANGLE2_Y_PER_FRAME, &pivot2);
-		rotate(model_vertexes2, Z_AXIS, ANGLE2_Z_PER_FRAME, &pivot2);
+		vertex_rotateall(model_vertexes1, X_AXIS, ANGLE1_X_PER_FRAME, &pivot1);
+		vertex_rotateall(model_vertexes1, Y_AXIS, ANGLE1_Y_PER_FRAME, &pivot1);
+		vertex_rotateall(model_vertexes1, Z_AXIS, ANGLE1_Z_PER_FRAME, &pivot1);
+		vertex_rotateall(model_vertexes2, X_AXIS, ANGLE2_X_PER_FRAME, &pivot2);
+		vertex_rotateall(model_vertexes2, Y_AXIS, ANGLE2_Y_PER_FRAME, &pivot2);
+		vertex_rotateall(model_vertexes2, Z_AXIS, ANGLE2_Z_PER_FRAME, &pivot2);
 
 		// 画面クリア
 		printf("\x1b[H");
@@ -86,8 +85,6 @@ int main(int argc, char **argv)
 
 		// 1秒待機
 		usleep(1000 * 1000 / FRAMES_PER_SECOND);
-
-		//return (0);
 	}
 	// ループ終了
 

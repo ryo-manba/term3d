@@ -5,10 +5,10 @@ FILES = main.c \
 	display_draw_getdepth.c \
 	display_print.c \
 	display_init.c \
-	move.c \
-	rotate.c \
-	normalize.c \
-	magnitude.c \
+	vertex_rotate.c \
+	vertex_rotateall.c \
+	vertex_expandall.c \
+	vertex_magnitude.c \
 	tm_create_model_vertexes.c \
 	tm_read_file.c \
 	tm_print_error_exit.c \
