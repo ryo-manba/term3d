@@ -10,7 +10,7 @@ FILES = main.c \
 	normalize.c \
 	magnitude.c \
 	tm_create_model_vertexes.c \
-	tm_file_read.c \
+	tm_read_file.c \
 	tm_print_error_exit.c \
 	tm_split.c \
 	tm_strjoin.c \

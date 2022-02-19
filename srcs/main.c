@@ -23,9 +23,9 @@ static char	check_file_extensions(const char *filename)
 
 int main(int argc, char **argv)
 {
-	t_vertex		*model_vertexes; // 3Dモデルの頂点情報(連結リスト)
 	char			*file_data;
 	char			file_type;
+	char			*file_name;
 	t_vertex		*model_vertexes1; // 3Dモデルの頂点情報(連結リスト)
 	t_vertex		*model_vertexes2; // 3Dモデルの頂点情報(連結リスト)
 	t_vector3		pivot1;
@@ -33,10 +33,16 @@ int main(int argc, char **argv)
 	char display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 
 	if (argc != 2)
-		print_error_exit("Wrong arguments");
-//	file_type = check_file_extensions(argv[1]); // .obj or .3d以外ならexit
-  file_type = ("./models/torus.3d");
-  
+	{
+		file_name = "./models/torus.3d";
+//		print_error_exit("Wrong arguments");
+	}
+	else
+		file_name = argv[1];
+
+	// 拡張子が obj か 3d 以外ならexitする
+	file_type = check_file_extensions(file_name);
+
 	pivot1.x = -15;
 	pivot1.y = -2;
 	pivot1.z = -1;
@@ -45,13 +51,11 @@ int main(int argc, char **argv)
 	pivot2.z = 1;
 
 	// コマンドライン引数で渡された 3D file のエラーチェック
-//	file_data = read_file(argv[1]);
-   file_data = read_file("./models/torus.3d");
+	file_data = read_file(file_name);
 
 	// コマンドライン引数で渡された 3D file を構造体に格納
-//	model_vertexes = create_model_vertexes(file_data, file_type);
-	model_vertexes1 = create_model_vertexes("./models/torus.3d", file_type);
-	model_vertexes2 = create_model_vertexes("./models/torus.3d", file_type);
+	model_vertexes1 = create_model_vertexes(file_data, file_type);
+	model_vertexes2 = create_model_vertexes(file_data, file_type);
 
 	normalize(model_vertexes1, EXPANSION_RATE1);
 	normalize(model_vertexes2, EXPANSION_RATE2);
