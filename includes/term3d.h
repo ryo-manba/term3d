@@ -10,6 +10,7 @@
 # define DISPLAY_HEIGHT 40
 # define DISPLAY_WIDTH 120
 # define FRAMES_PER_SECOND 60
+# define DEFAULT_CAMERA_MODE 0
 # define OBJ1_EXPANSION_RATE 3
 # define OBJ2_EXPANSION_RATE 4
 # define OBJ1_ROTATE_SPEED_X 1
@@ -60,8 +61,9 @@ typedef struct s_vertex
 
 typedef struct s_camera
 {
-	t_vector3	*position;
+	struct s_vector3	*position;
 	double		horizontal_angle;
+	enum e_camera_mode	mode;
 }	t_camera;
 
 char	*read_file(const char *file_path);

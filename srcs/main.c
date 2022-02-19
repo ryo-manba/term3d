@@ -83,8 +83,8 @@ int main(int argc, char **argv)
 		display_init(display);
 
 		// 画面に描画
-		display_draw(display, model_vertexes1, PERSPECTIVE, camera);
-		display_draw(display, model_vertexes2, PERSPECTIVE, camera);
+		display_draw(display, model_vertexes1, camera);
+		display_draw(display, model_vertexes2, camera);
 
 		// 画面出力
 		display_print(display);
