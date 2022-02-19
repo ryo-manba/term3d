@@ -2,14 +2,17 @@
 #include <termios.h>
 #include <fcntl.h>
 
-static void	set_non_blocking_stdin(void);
+static void	set_non_blocking_stdin(struct termios *setting);
 
 bool	camera_scanf(t_camera *camera, int *input_char, bool *input_flag)
 {
+	struct termios setting;
+
 	// 標準入力ノンブロッキング
-	set_non_blocking_stdin();
+	set_non_blocking_stdin(&setting);
 	*input_char = getchar();
-	close(STDIN_FILENO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &setting);
+	fcntl(STDIN_FILENO, F_SETFL, setting);
 	// if (*input_char == EOF && *input_flag == true)
 	// 	return (true);
 	if (*input_char == 'w')
@@ -35,13 +38,10 @@ bool	camera_scanf(t_camera *camera, int *input_char, bool *input_flag)
 }
 
 /* 標準入力をノンブロッキング */
-static void	set_non_blocking_stdin(void)
+static void	set_non_blocking_stdin(struct termios *setting)
 {
-	//return ;
-	struct termios setting;
-
-	tcgetattr(STDIN_FILENO, &setting);
-	setting.c_lflag &= ~(ECHO | ICANON);
-	tcsetattr(STDIN_FILENO, TCSANOW, &setting);
+	tcgetattr(STDIN_FILENO, setting);
+	setting->c_lflag &= ~(ECHO | ICANON);
+	tcsetattr(STDIN_FILENO, TCSANOW, setting);
 	fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
 }
