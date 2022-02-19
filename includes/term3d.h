@@ -14,7 +14,7 @@
 # define DEFAULT_CAMERA_MODE 1
 # define OBJ1_EXPANSION_RATE 3
 # define OBJ2_EXPANSION_RATE 4
-# define OBJ1_ROTATE_SPEED_X 0
+# define OBJ1_ROTATE_SPEED_X 1
 # define OBJ1_ROTATE_SPEED_Y 1
 # define OBJ1_ROTATE_SPEED_Z 0
 # define OBJ2_ROTATE_SPEED_X 0
@@ -28,7 +28,7 @@
 # define OBJ2_PIVOT_Z 1
 # define CAMERA_POSITION_X 20 // 固定
 # define CAMERA_POSITION_Y -5
-# define CAMERA_POSITION_Z -100 // 固定
+# define CAMERA_POSITION_Z -70 // 固定
 # define CAMERA_ANGLE_HORIZONTAL 0
 # define FILE_TYPE_THREED ','
 # define FILE_TYPE_OBJ ' '
