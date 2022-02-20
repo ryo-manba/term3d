@@ -32,7 +32,7 @@
 # define CAMERA_POSITION_Z -140 // 固定
 # define CAMERA_ANGLE_HORIZONTAL 0 // 水平回転角度
 # define FILE_TYPE_THREED ','
-# define FILE_TYPE_OBJ ' '
+# define FILE_TYPE_OBJ    ' '
 
 typedef enum e_axis
 {
@@ -59,6 +59,7 @@ typedef struct s_vertex
 	struct s_vector3	*position;
 	double				magnitude;
 	struct s_vertex		*next;
+	struct s_vertex		*last;
 }	t_vertex;
 
 typedef struct s_camera
