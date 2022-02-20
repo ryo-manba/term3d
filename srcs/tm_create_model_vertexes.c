@@ -2,18 +2,19 @@
 #include "term3d.h"
 
 /**
- * <objファイル形式>
- * # コメント
- * mtllib マテリアルファイル名
- * g グループ名
- * o オブジェクト名
- * s スムーズシェーディングの切り替え
- * usemtl マテリアル名
- * v  x成分値 y成分値 z成分値
- * vt x成分値 y成分値
- * vn x成分値 y成分値 z成分値
- * f  頂点座標値番号/テクスチャ座標値番号/頂点法線ベクトル番号 (多角形の頂点の数だけ続く）
- * [参考] https://www.hiramine.com/programming/3dmodelfileformat/objfileformat.html
+ * <obj file format>
+ * #      : Comments
+ * mtllib : material file name
+ * g      : group name
+ * o      : Object name
+ * s      : smooth shading toggle
+ * usemtl : material name
+ * v      : x-component value y-component value z-component value
+ * vt     : x-component value y-component value
+ * vn     : x-component value y-component value z-component value
+ * f      : vertex coordinate number/
+ *          texture coordinate number/
+ *          vertex normal vector number
  */
 static int	check_obj_type(const char *keyword)
 {
@@ -41,8 +42,7 @@ static int	check_obj_type(const char *keyword)
 }
 
 /**
- * @brief keywordと要素数が正しいかチェックする。
- * @param strs
+ * @brief Check that the keyword and number of elements are correct.
  */
 static bool	check_line_obj(const char **lines)
 {
@@ -66,9 +66,6 @@ static bool	check_line_obj(const char **lines)
 	return (lines[i] == NULL);
 }
 
-/**
- * @return 要素が3つの場合 true
- */
 static bool	check_line_3d(const char **lines)
 {
 	if (lines[0] == NULL || \
@@ -90,8 +87,7 @@ static void	check_line_exit_if_invalid(const char **lines, const char file_type)
 /**
  * @brief Create a model vertexes object
  * @param file_data
- * @param delimiter 区切り文字 :.3d->',' .obj->' '
- * @return t_vertex*
+ * @param delimiter 3d->','  obj->' '
  */
 t_vertex	*create_model_vertexes(const char *file_data, const char delimiter)
 {

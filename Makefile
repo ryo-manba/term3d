@@ -50,4 +50,7 @@ re: fclean all
 test: $(NAME)
 	./test.sh
 
+norm:
+	python3 -m norminette
+
 .PHONY: all clean fclean re
