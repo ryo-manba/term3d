@@ -1,9 +1,9 @@
 #include "display.h"
 
-void display_init(char display[][DISPLAY_WIDTH])
+void	display_init(char display[][DISPLAY_WIDTH])
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < DISPLAY_HEIGHT)

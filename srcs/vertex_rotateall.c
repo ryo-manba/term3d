@@ -1,14 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vertex_rotateall.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/20 06:24:33 by tkanzaki          #+#    #+#             */
+/*   Updated: 2022/02/20 06:24:34 by tkanzaki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vertex.h"
 
-static void		rotate(t_vertex *index, const t_axis axis, const double additional_radian, const t_vector3 *pivot);
+static void	rotate(t_vertex *index, const t_axis axis,
+				const double additional_radian,
+				const t_vector3 *pivot);
+static void	offset_rotate(double *horizontal_position,
+				double *vertical_position,
+				const double additional_radian,
+				const t_vector2 *offset);
+static void	set_vector2_position(t_vertex *index,
+				double **horizontal_position,
+				double **vertical_position,
+				const t_axis axis);
+static void	set_vector2_offset(const t_vector3 *pivot,
+				t_vector2 *offset,
+				const t_axis axis);
 
-/**
- * 頂点を全て反時計回りに軸回転させる
- * @param model_vertexes 頂点の座標
- * @param axis 回転軸
- * @param angle 角度
- */
-void	vertex_rotateall(t_vertex *model_vertexes, const t_axis axis, const int angle, const t_vector3 *pivot)
+void	vertex_rotateall(t_vertex *model_vertexes,
+	const t_axis axis, const int angle, const t_vector3 *pivot)
 {
 	t_vertex		*index;
 	const double	additional_radian = (((double)angle / 360) * 2 * M_PI);
@@ -25,42 +45,70 @@ void	vertex_rotateall(t_vertex *model_vertexes, const t_axis axis, const int ang
 	}
 }
 
-/* 平面上で頂点を反時計回りに軸回転させる */
-static void	rotate(t_vertex *index, const t_axis axis, const double additional_radian, const t_vector3 *pivot)
+static void	rotate(t_vertex *index, const t_axis axis,
+	const double additional_radian,
+	const t_vector3 *pivot)
 {
-	double	*horizontal_position; // 水平方向のポインタ
-	double	*vertical_position; // 垂直方向のポインタ
-	double	horizontal_offset;
-	double	vertical_offset;
+	double		*horizontal_position;
+	double		*vertical_position;
+	t_vector2	offset;
 
+	set_vector2_offset(pivot, &offset, axis);
+	set_vector2_position(index, &horizontal_position, &vertical_position, axis);
+	offset_rotate(horizontal_position, vertical_position,
+		additional_radian, &offset);
+}
+
+static void	set_vector2_offset(const t_vector3 *pivot,
+	t_vector2 *offset, const t_axis axis)
+{
 	if (axis == X_AXIS)
 	{
-		// z-y平面
-		horizontal_position = &index->position->z;
-		vertical_position = &index->position->y;
-		horizontal_offset = pivot->z;
-		vertical_offset = pivot->y;
+		offset->x = pivot->z;
+		offset->y = pivot->y;
 	}
 	else if (axis == Y_AXIS)
 	{
-		// x-z平面
-		horizontal_position = &index->position->x;
-		vertical_position = &index->position->z;
-		horizontal_offset = pivot->x;
-		vertical_offset = pivot->z;
+		offset->x = pivot->x;
+		offset->y = pivot->z;
 	}
 	else
 	{
-		// x-y平面
-		horizontal_position = &index->position->x;
-		vertical_position = &index->position->y;
-		horizontal_offset = pivot->x;
-		vertical_offset = pivot->y;
+		offset->x = pivot->x;
+		offset->y = pivot->y;
 	}
-	*horizontal_position -= horizontal_offset;
-	*vertical_position -= vertical_offset;
-	// 回転させた値をセット
+}
+
+static void	set_vector2_position(t_vertex *index,
+	double **horizontal_position,
+	double **vertical_position,
+	const t_axis axis)
+{
+	if (axis == X_AXIS)
+	{
+		*horizontal_position = &index->position->z;
+		*vertical_position = &index->position->y;
+	}
+	else if (axis == Y_AXIS)
+	{
+		*horizontal_position = &index->position->x;
+		*vertical_position = &index->position->z;
+	}
+	else
+	{
+		*horizontal_position = &index->position->x;
+		*vertical_position = &index->position->y;
+	}
+}
+
+static void	offset_rotate(double *horizontal_position,
+	double *vertical_position,
+	const double additional_radian,
+	const t_vector2 *offset)
+{
+	*horizontal_position -= offset->x;
+	*vertical_position -= offset->y;
 	vertex_rotate(horizontal_position, vertical_position, additional_radian);
-	*horizontal_position += horizontal_offset;
-	*vertical_position += vertical_offset;
+	*horizontal_position += offset->x;
+	*vertical_position += offset->y;
 }
