@@ -27,7 +27,7 @@ FILES = main.c \
 
 SRCS = ${addprefix ${DIR},${FILES}}
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=leak
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 OBJS = ${SRCS:.c=.o}
 HEADERS = includes/
 
