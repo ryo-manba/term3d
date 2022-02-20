@@ -1,7 +1,6 @@
-#include <stdlib.h>
 #include "tm_wrapper.h"
 
-char *tm_strjoin(char *s1, char *s2)
+char	*tm_strjoin(const char *s1, const char *s2)
 {
 	char	*joined_str;
 	size_t	i;
