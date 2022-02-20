@@ -1,22 +1,15 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <ctype.h>
-#include <math.h>
 #include "tm_wrapper.h"
 #include "tm_utils.h"
 #include "term3d.h"
 
-# define BUF_SIZE 10000
+#define BUF_SIZE 10000
 
 char	*read_file(const char *file_path)
 {
-	char		buf[BUF_SIZE];
-	char		*file_data;
-	char		*tmp;
-	FILE 		*fp;
+	char	buf[BUF_SIZE];
+	char	*file_data;
+	char	*tmp;
+	FILE	*fp;
 
 	fp = xfopen(file_path, "r");
 	file_data = NULL;

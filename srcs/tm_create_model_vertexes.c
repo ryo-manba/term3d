@@ -1,32 +1,6 @@
 #include "tm_create_model_vertexes.h"
 #include "term3d.h"
 
-#define OBJ_COMMENT 1
-#define OBJ_NAME 1
-#define OBJ_SMOOTH_SHADING 1
-#define OBJ_MTLLIB 1
-#define OBJ_GROUP 1
-#define OBJ_USEMTL 1
-#define OBJ_VERTEX_COORDINATE_VALUE 3
-#define OBJ_VERTEX_TEXTURE 2
-#define OBJ_VERTEX_NORMAL_VECTOR 3
-#define OBJ_POLYGONAL_SUFACE_DATA 3 // ポリゴンデータは三角の場合のみ対応
-#define OBJ_NONEXISTENT_KEYWORD -1
-
-static void free_double_pointer(char **dp)
-{
-	size_t	i;
-
-	i = 0;
-	while (dp[i])
-	{
-		free(dp[i]);
-		i += 1;
-	}
-	free(dp[i]);
-	free(dp);
-}
-
 /**
  * <objファイル形式>
  * # コメント
@@ -38,7 +12,7 @@ static void free_double_pointer(char **dp)
  * v  x成分値 y成分値 z成分値
  * vt x成分値 y成分値
  * vn x成分値 y成分値 z成分値
- * f 頂点座標値番号/テクスチャ座標値番号/頂点法線ベクトル番号 (多角形の頂点の数だけ続く）
+ * f  頂点座標値番号/テクスチャ座標値番号/頂点法線ベクトル番号 (多角形の頂点の数だけ続く）
  * [参考] https://www.hiramine.com/programming/3dmodelfileformat/objfileformat.html
  */
 static int	check_obj_type(const char *keyword)
@@ -66,46 +40,50 @@ static int	check_obj_type(const char *keyword)
 	return (OBJ_NONEXISTENT_KEYWORD);
 }
 
-static bool	check_line_obj(const char **strs)
+/**
+ * @brief keywordと要素数が正しいかチェックする。
+ * @param strs
+ */
+static bool	check_line_obj(const char **lines)
 {
 	int	type;
 	int	i;
 
-	if (strs[0] == NULL)
+	if (lines[0] == NULL)
 		return (false);
-	type = check_obj_type(strs[0]);
+	type = check_obj_type(lines[0]);
 	if (type == OBJ_NONEXISTENT_KEYWORD)
 		return (false);
-	if (type == OBJ_COMMENT) // 後ろに何があってもいい
+	if (type == OBJ_COMMENT)
 		return (true);
 	i = 0;
 	while (i <= type)
 	{
-		if (strs[i] == NULL)
+		if (lines[i] == NULL)
 			return (false);
 		i += 1;
 	}
-	return (strs[i] == NULL);
+	return (lines[i] == NULL);
 }
 
 /**
  * @return 要素が3つの場合 true
  */
-static bool	check_line_3d(const char **strs)
+static bool	check_line_3d(const char **lines)
 {
-	if (strs[0] == NULL || \
-		strs[1] == NULL || \
-		strs[2] == NULL || \
-		strs[3] != NULL)
+	if (lines[0] == NULL || \
+		lines[1] == NULL || \
+		lines[2] == NULL || \
+		lines[3] != NULL)
 		return (false);
 	return (true);
 }
 
-static void check_line_exit_if_invalid(const char **strs, const char file_type)
+static void	check_line_exit_if_invalid(const char **lines, const char file_type)
 {
-	if (file_type == FILE_TYPE_THREED && !check_line_3d(strs))
+	if (file_type == FILE_TYPE_THREED && !check_line_3d(lines))
 		print_error_exit("Invalid `.3d` file format");
-	if (file_type == FILE_TYPE_OBJ && !check_line_obj(strs))
+	if (file_type == FILE_TYPE_OBJ && !check_line_obj(lines))
 		print_error_exit("Invalid `.obj` file format");
 }
 
@@ -119,33 +97,27 @@ t_vertex	*create_model_vertexes(const char *file_data, const char delimiter)
 {
 	char		**strs;
 	char		**newline_delim_data;
+	const int	offset = (delimiter == FILE_TYPE_OBJ);
 	t_vertex	*vt;
 	size_t		i;
-	int			offset;
 
 	if (file_data == NULL)
 		print_error_exit("File is empty");
-	newline_delim_data = tm_split(file_data, '\n'); // 改行ごとにsplit
-	i = 0;
-	offset = (delimiter == FILE_TYPE_OBJ);
-    vt = NULL;
-	while (newline_delim_data[i])
+	newline_delim_data = tm_split(file_data, '\n');
+	vt = NULL;
+	i = -1;
+	while (newline_delim_data[++i])
 	{
-		strs = tm_split(newline_delim_data[i], delimiter); // 区切り文字ごとにスプリット
-		check_line_exit_if_invalid((const char**)strs, delimiter);
-		if (strcmp(strs[0], "v") != 0)
- 		{
- 			i += 1;
- 			continue;
- 		}
-		tm_vertex_add_back(&vt,
-			tm_new_vertex(
-			tm_new_vector(xstrtod(strs[0 + offset]),
-						  xstrtod(strs[1 + offset]),
-						  xstrtod(strs[2 + offset]))));
-		free_double_pointer(strs);
-		i += 1;
+		strs = tm_split(newline_delim_data[i], delimiter);
+		check_line_exit_if_invalid((const char **)strs, delimiter);
+		if (!(offset == 1 && strcmp(strs[0], "v") != 0))
+		{
+			tm_vertex_add_back(&vt, tm_new_vertex(
+					tm_new_vector(xstrtod(strs[0 + offset]),
+						xstrtod(strs[1 + offset]), xstrtod(strs[2 + offset]))));
+		}
+		free_double_pointer((void **)strs);
 	}
-	free_double_pointer(newline_delim_data);
+	free_double_pointer((void **)newline_delim_data);
 	return (vt);
 }

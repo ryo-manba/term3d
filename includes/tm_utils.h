@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "term3d.h"
 
-
+void	free_double_pointer(void **dp);
 void	print_error_exit(const char *msg);
 char	*tm_strjoin(char *s1, char *s2);
 char	**tm_split(char const *s, char c);
