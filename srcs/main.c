@@ -81,6 +81,9 @@ int main(int argc, char **argv)
 			break ;
 		}
 
+		// カメラ制御
+		camera_control(camera);
+
 		// ピボットを中心に 3D モデルを回転
 		vertex_rotateall(model_vertexes1, X_AXIS, OBJ1_ROTATE_SPEED_X, &pivot1);
 		vertex_rotateall(model_vertexes1, Y_AXIS, OBJ1_ROTATE_SPEED_Y, &pivot1);

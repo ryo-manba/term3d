@@ -27,6 +27,7 @@ double display_draw_getscreenpos(const t_axis axis, const double real_pos, const
 static double distance_ratio(const t_axis axis, const t_camera *camera, const t_vertex *index)
 {
 	double distance;
+	double tan_camera_obj;
 
 	if (index->position->z - camera->position->z < 0)
 	{
@@ -38,11 +39,13 @@ static double distance_ratio(const t_axis axis, const t_camera *camera, const t_
 	}
 	if (axis == X_AXIS)
 	{
-		return (DISPLAY_WIDTH / distance * tan(VIEW_ANGLE_WIDTH / 2) * 2);
+		tan_camera_obj = tan(VIEW_ANGLE_WIDTH / 2);
+		return (DISPLAY_WIDTH / distance * tan_camera_obj * 2);
 	}
 	else
 	{
-		return (DISPLAY_HEIGHT / distance * tan(VIEW_ANGLE_HEIGHT / 2) * 2);
+		tan_camera_obj = tan(VIEW_ANGLE_HEIGHT / 2);
+		return (DISPLAY_HEIGHT / distance * tan_camera_obj * 2);
 	}
 }
 
@@ -61,10 +64,11 @@ static double	get_parallel_pos(const t_axis axis, const double real_pos, const t
 
 static double get_perspective_pos(const t_axis axis, const double real_pos, const t_vertex *index, const t_camera *camera)
 {
-	const double	tan_before = real_pos / (camera->position->z - index->position->z);
+	double			tan_before;
 	double			tan_after;
 	double			perspective_position;
 
+	tan_before = real_pos / (camera->position->z - index->position->z);
 	if (axis == Y_AXIS)
 		tan_after = 0;
 	else
