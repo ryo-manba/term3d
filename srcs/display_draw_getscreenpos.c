@@ -2,7 +2,7 @@
 
 static double	get_parallel_pos(const t_axis axis, const double real_pos, const t_vertex *index, const t_camera *camera);
 static double	get_perspective_pos(const t_axis axis, const double real_pos, const t_vertex *index, const t_camera *camera);
-static double	distance_ratio(const t_axis axis, const t_camera *camera);
+static double distance_ratio(const t_axis axis, const t_camera *camera, const t_vertex *index);
 
 double display_draw_getscreenpos(const t_axis axis, const double real_pos, const t_vertex *index, const t_camera *camera)
 {
@@ -18,20 +18,31 @@ double display_draw_getscreenpos(const t_axis axis, const double real_pos, const
 		// 透視投影
 		screen_pos = get_perspective_pos(axis, real_pos, index, camera);
 	}
-	screen_pos *= distance_ratio(axis, camera);
+	// カメラとオブジェクトの距離によって大きさを変える
+	screen_pos *= distance_ratio(axis, camera, index);
 	screen_pos = floor(screen_pos);
 	return (screen_pos);
 }
 
-static double distance_ratio(const t_axis axis, const t_camera *camera)
+static double distance_ratio(const t_axis axis, const t_camera *camera, const t_vertex *index)
 {
-	if (axis == X_AXIS)
+	double distance;
+
+	if (index->position->z - camera->position->z < 0)
 	{
-		return (DISPLAY_WIDTH / fabs(camera->position->z) * sin(VIEW_ANGLE_WIDTH / 2) * 2);
+		distance = 0;
 	}
 	else
 	{
-		return (DISPLAY_HEIGHT / fabs(camera->position->z) * sin(VIEW_ANGLE_HEIGHT / 2) * 2);
+		distance = index->position->z - camera->position->z;
+	}
+	if (axis == X_AXIS)
+	{
+		return (DISPLAY_WIDTH / distance * tan(VIEW_ANGLE_WIDTH / 2) * 2);
+	}
+	else
+	{
+		return (DISPLAY_HEIGHT / distance * tan(VIEW_ANGLE_HEIGHT / 2) * 2);
 	}
 }
 
