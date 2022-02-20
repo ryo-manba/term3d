@@ -90,5 +90,5 @@ static double	distance_ratio(const t_camera *camera,
 		return (DISPLAY_WIDTH);
 	else
 		distance = index->position->z - camera->position->z;
-	return ((-1) * CAMERA_POSITION_Z / distance);
+	return (PARSE_LEVEL / distance);
 }
