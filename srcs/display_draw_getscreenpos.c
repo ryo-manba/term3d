@@ -9,8 +9,7 @@ static double	get_perspective_pos(const t_axis axis,
 					const double real_pos,
 					const t_vertex *index,
 					const t_camera *camera);
-static double	distance_ratio(const t_axis axis,
-					const t_camera *camera,
+static double	distance_ratio(const t_camera *camera,
 					const t_vertex *index);
 
 double	display_draw_getscreenpos(const t_axis axis,
@@ -76,29 +75,20 @@ static double	get_perspective_pos(const t_axis axis,
 			* (1 - tan_after * tan_after)
 			/ (1 - tan_after * tan_before)
 			- tan_after);
-	perspective_position *= distance_ratio(axis, camera, index);
+	perspective_position *= distance_ratio(camera, index);
+	if (axis == Y_AXIS)
+		perspective_position *= -1;
 	return (perspective_position);
 }
 
-static double	distance_ratio(const t_axis axis,
-	const t_camera *camera,
+static double	distance_ratio(const t_camera *camera,
 	const t_vertex *index)
 {
 	double	distance;
-	double	tan_camera_obj;
 
-	if (index->position->z - camera->position->z < 0)
-		distance = 0;
+	if (index->position->z < camera->position->z)
+		return (DISPLAY_WIDTH);
 	else
 		distance = index->position->z - camera->position->z;
-	if (axis == X_AXIS)
-	{
-		tan_camera_obj = tan(VIEW_ANGLE_WIDTH / 2);
-		return (DISPLAY_WIDTH / distance * tan_camera_obj * 2);
-	}
-	else
-	{
-		tan_camera_obj = tan(VIEW_ANGLE_HEIGHT / 2);
-		return (DISPLAY_HEIGHT / distance * tan_camera_obj * 2);
-	}
+	return ((-1) * CAMERA_POSITION_Z / distance);
 }

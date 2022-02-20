@@ -16,17 +16,17 @@
 # define OBJ1_EXPANSION_RATE 3 // スケール
 # define OBJ2_EXPANSION_RATE 4
 # define OBJ1_ROTATE_SPEED_X 0 // 回転角度
-# define OBJ1_ROTATE_SPEED_Y 0
+# define OBJ1_ROTATE_SPEED_Y 2
 # define OBJ1_ROTATE_SPEED_Z 0
 # define OBJ2_ROTATE_SPEED_X 0
-# define OBJ2_ROTATE_SPEED_Y 0
+# define OBJ2_ROTATE_SPEED_Y 2
 # define OBJ2_ROTATE_SPEED_Z 0
-# define OBJ1_PIVOT_X -15 // 回転ピボット
-# define OBJ1_PIVOT_Y -2
-# define OBJ1_PIVOT_Z -1
-# define OBJ2_PIVOT_X 15
-# define OBJ2_PIVOT_Y 2
-# define OBJ2_PIVOT_Z 1
+# define OBJ1_PIVOT_X 100 // 回転ピボット
+# define OBJ1_PIVOT_Y 0
+# define OBJ1_PIVOT_Z 10
+# define OBJ2_PIVOT_X -100
+# define OBJ2_PIVOT_Y 0
+# define OBJ2_PIVOT_Z 10
 # define CAMERA_POSITION_X 20 // 固定
 # define CAMERA_POSITION_Y -5
 # define CAMERA_POSITION_Z -80 // 固定
