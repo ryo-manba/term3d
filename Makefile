@@ -2,7 +2,7 @@ NAME = term3d
 DIR = srcs/
 FILES = main.c \
 	camera_init.c \
-	camera_destory.c \
+	camera_destroy.c \
 	camera_scanf.c \
 	camera_control.c \
 	display_draw.c \
@@ -22,8 +22,8 @@ FILES = main.c \
 	tm_vector_utils.c \
 	tm_wrapper.c
 SRCS = ${addprefix ${DIR},${FILES}}
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CC = clang
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=leak
 OBJS = ${SRCS:.c=.o}
 HEADERS = includes/
 
