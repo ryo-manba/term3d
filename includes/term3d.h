@@ -12,7 +12,7 @@
 # define VIEW_ANGLE_WIDTH 120 // 視野角
 # define VIEW_ANGLE_HEIGHT 80
 # define FRAMES_PER_SECOND 60 // FPS
-# define DEFAULT_CAMERA_MODE 0 // 0:平行投影 1:透視投影
+# define DEFAULT_CAMERA_MODE 1 // 0:平行投影 1:透視投影
 # define OBJ1_EXPANSION_RATE 3 // スケール
 # define OBJ2_EXPANSION_RATE 4
 # define OBJ1_ROTATE_SPEED_X 0 // 回転角度

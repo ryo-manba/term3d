@@ -36,8 +36,6 @@ t_vertex	*tm_new_vertex(t_vector3 *vec)
  */
 void	tm_vertex_add_back(t_vertex **vt, t_vertex *new)
 {
-	t_vertex	*last;
-
 	if (*vt == NULL)
 		*vt = new;
 	else
