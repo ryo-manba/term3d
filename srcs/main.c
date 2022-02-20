@@ -4,7 +4,6 @@
 #include "camera.h"
 #include "tm_utils.h"
 #include "tm_create_model_vertexes.h"
-#include <string.h>
 #include <signal.h>
 #define DISABLE_CURSOR "\033[?25l"
 #define ENABLE_CURSOR  "\033[?25h"
@@ -20,7 +19,7 @@ static void	set_scale(t_vertex **model_vertexes, int nb_models)
 	int	scale;
 
 	i = 0;
-	scale = OBJ1_EXPANSION_RATE;
+	scale = OBJ_EXPANSION_RATE;
 	while (i < nb_models)
 	{
 		vertex_expandall(model_vertexes[i], scale);
@@ -40,16 +39,16 @@ static void	models_rotate(t_vertex **vertexes, t_vector3 *pivots, int nb_models)
 	while (i < nb_models)
 	{
 		vertex_rotateall(vertexes[i], X_AXIS,
-			OBJ1_ROTATE_SPEED_X + i, &pivots[i]);
+			OBJ_ROTATE_SPEED_X + i, &pivots[i]);
 		vertex_rotateall(vertexes[i], Y_AXIS,
-			OBJ1_ROTATE_SPEED_Y + i, &pivots[i]);
+			OBJ_ROTATE_SPEED_Y + i, &pivots[i]);
 		vertex_rotateall(vertexes[i], Z_AXIS,
-			OBJ1_ROTATE_SPEED_Z + i, &pivots[i]);
+			OBJ_ROTATE_SPEED_Z + i, &pivots[i]);
 		i += 1;
 	}
 }
 
-void	models_print(
+static void	models_print(
 		t_vertex **vertexes, t_camera *camera,
 		char display[DISPLAY_HEIGHT][DISPLAY_WIDTH], int nb_models)
 {

@@ -31,9 +31,9 @@ void	init_pivots(t_vector3 *pivots, int nb_models)
 	i = 0;
 	while (i < nb_models)
 	{
-		pivots[i].x = OBJ1_PIVOT_X * sign;
-		pivots[i].y = OBJ1_PIVOT_Y * sign;
-		pivots[i].z = OBJ1_PIVOT_Z * sign;
+		pivots[i].x = OBJ_PIVOT_X * sign;
+		pivots[i].y = OBJ_PIVOT_Y * sign;
+		pivots[i].z = OBJ_PIVOT_Z * sign;
 		sign *= 1;
 		i += 1;
 	}

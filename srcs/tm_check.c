@@ -17,8 +17,8 @@ char	check_file_extensions(const char *filename)
 
 void	check_argc_exit_if_invalid(int argc)
 {
-	if (argc == 2 || argc == 3)
+	if (argc >= 2)
 		return ;
-	printf("Usage: ./term3d file_path [file_path]\n");
-	exit(1);
+	printf("Usage: ./term3d file_path\n");
+	exit(EXIT_FAILURE);
 }
