@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vertex_expandall.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/20 06:24:42 by tkanzaki          #+#    #+#             */
+/*   Updated: 2022/02/20 06:24:42 by tkanzaki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vertex.h"
 
 void	vertex_expandall(t_vertex *model_vertexes, const int expansion_rate)

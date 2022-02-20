@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vertex_rotate.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/20 06:24:36 by tkanzaki          #+#    #+#             */
+/*   Updated: 2022/02/20 06:24:36 by tkanzaki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vertex.h"
 
 static double	vector2_magnitude(const double vector2_x,
@@ -17,7 +29,7 @@ void	vertex_rotate(double *horizontal, double *vertical,
 
 	before = vector2_magnitude(*horizontal, *vertical);
 	*horizontal = addition_theorem_cos(*horizontal,
-						*vertical, additional_radian);
+			*vertical, additional_radian);
 	*vertical = addition_theorem_sin(*horizontal, *vertical, additional_radian);
 	after = vector2_magnitude(*horizontal, *vertical);
 	*horizontal *= before / after;
