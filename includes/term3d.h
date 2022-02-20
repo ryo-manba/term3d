@@ -13,18 +13,19 @@
 # define VIEW_ANGLE_HEIGHT 80
 # define FRAMES_PER_SECOND 60 // FPS
 # define DEFAULT_CAMERA_MODE 1 // 0:平行投影 1:透視投影
+
 # define OBJ_EXPANSION_RATE 3 // スケール
 # define OBJ_ROTATE_SPEED_X 0 // 回転角度
 # define OBJ_ROTATE_SPEED_Y 2
 # define OBJ_ROTATE_SPEED_Z 0
 # define OBJ_PIVOT_X 100 // 回転ピボット
 # define OBJ_PIVOT_Y 0
-# define OBJ_PIVOT_Z 10
 # define CAMERA_POSITION_X 20 // 固定
 # define CAMERA_POSITION_Y -5
 # define CAMERA_POSITION_Z -80 // 固定
 # define CAMERA_ANGLE_HORIZONTAL 0 // 水平回転角度
 # define CAMERA_ANGLE_RANGE 180 // カメラ回転の可動域
+# define PARSE_LEVEL 80
 # define FILE_TYPE_THREED ','
 # define FILE_TYPE_OBJ    ' '
 # define MAX_MODEL_SIZE	100
