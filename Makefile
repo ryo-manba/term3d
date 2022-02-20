@@ -23,7 +23,7 @@ FILES = main.c \
 	tm_wrapper.c
 SRCS = ${addprefix ${DIR},${FILES}}
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=leak
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=
 OBJS = ${SRCS:.c=.o}
 HEADERS = includes/
 
