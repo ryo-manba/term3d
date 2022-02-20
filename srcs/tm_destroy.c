@@ -1,17 +1,17 @@
 #include "tm_utils.h"
 #include "camera.h"
 
-void destroy_all(t_vertex **vertexes, t_camera *camera)
+void	destroy_all(t_vertex **vertexes, t_camera *camera)
 {
 	vertexes_destroy(vertexes);
-	camera_destroy(camera); // 構造体を解放
+	camera_destroy(camera);
 }
 
 void	vertexes_destroy(t_vertex **vertexes)
 {
-	t_vertex *vt;
-	t_vertex *tmp;
-	int	i;
+	t_vertex	*vt;
+	t_vertex	*tmp;
+	int			i;
 
 	i = 0;
 	while (vertexes[i])

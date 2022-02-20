@@ -1,7 +1,8 @@
 #include "tm_utils.h"
 #include "tm_create_model_vertexes.h"
 
-void	init_model_vertexes(t_vertex *vertexes[3], int nb_models, char **file_paths)
+void	init_model_vertexes(
+		t_vertex *vertexes[MAX_MODEL_SIZE], int nb_models, char **file_paths)
 {
 	char	*file_data;
 	char	*file_name;
@@ -21,7 +22,7 @@ void	init_model_vertexes(t_vertex *vertexes[3], int nb_models, char **file_paths
 	vertexes[nb_models] = NULL;
 }
 
-void init_pivots(t_vector3 *pivots, int nb_models)
+void	init_pivots(t_vector3 *pivots, int nb_models)
 {
 	int	i;
 	int	sign;

@@ -75,8 +75,8 @@ static void	signal_off(int signal1, int signal2)
 int main(int argc, char **argv)
 {
 	char			display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
-	t_vertex		*model_vertexes[3]; // 3Dモデルの頂点情報(連結リスト)
-	t_vector3		pivots[2];
+	t_vertex		*model_vertexes[MAX_MODEL_SIZE]; // 3Dモデルの頂点情報(連結リスト)
+	t_vector3		pivots[MAX_MODEL_SIZE];
 	t_camera		*camera;
 	int				input_c;
 	bool			input_flag;

@@ -34,6 +34,7 @@
 # define CAMERA_ANGLE_RANGE 180 // カメラ回転の可動域
 # define FILE_TYPE_THREED ','
 # define FILE_TYPE_OBJ    ' '
+# define MAX_MODEL_SIZE	100
 
 typedef enum e_axis
 {

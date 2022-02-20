@@ -15,7 +15,7 @@ char	check_file_extensions(const char *filename)
 	return ('*');
 }
 
-void check_argc_exit_if_invalid(int argc)
+void	check_argc_exit_if_invalid(int argc)
 {
 	if (argc == 2 || argc == 3)
 		return ;
