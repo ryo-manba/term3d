@@ -46,6 +46,8 @@ static double	get_parallel_pos(const t_axis axis,
 		* cos(additional_radian)
 		- (index->position->z)
 		* sin(additional_radian);
+	if (camera->position->z > BORDER_VALUE_Z)
+		camera->position->z = PARALLEL_BORDER_VALUE_Z;
 	parallel_position /= (1 + (pararell_1x_pos - camera->position->z) / 10);
 	if (axis == Y_AXIS)
 		parallel_position *= -1;

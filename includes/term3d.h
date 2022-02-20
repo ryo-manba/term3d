@@ -23,6 +23,7 @@
 # define CAMERA_POSITION_X 20 // 固定
 # define CAMERA_POSITION_Y -5
 # define CAMERA_POSITION_Z -80 // 固定
+# define PARALLEL_BORDER_VALUE_Z 10 // 固定
 # define CAMERA_ANGLE_HORIZONTAL 0 // 水平回転角度
 # define CAMERA_ANGLE_RANGE 150 // カメラ回転の可動域
 # define PARSE_LEVEL 150
