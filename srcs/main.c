@@ -78,6 +78,7 @@ int main(int argc, char **argv)
 		// 入力をとってカメラ制御。EOFがきたらbreak
 		if (camera_scanf(camera, &input_c, &input_flag))
 		{
+			printf("Bye.\n");
 			break ;
 		}
 
