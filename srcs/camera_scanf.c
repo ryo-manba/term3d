@@ -2,6 +2,8 @@
 #include <termios.h>
 #include <fcntl.h>
 
+#define EOT 4
+
 static void	set_non_blocking_stdin(struct termios *setting);
 
 bool	camera_scanf(t_camera *camera, int *input_char, bool *input_flag)
@@ -13,8 +15,8 @@ bool	camera_scanf(t_camera *camera, int *input_char, bool *input_flag)
 	*input_char = getchar();
 	tcsetattr(STDIN_FILENO, TCSANOW, &setting);
 	fcntl(STDIN_FILENO, F_SETFL, setting);
-	// if (*input_char == EOF && *input_flag == true)
-	// 	return (true);
+	if (*input_char == EOT)
+	 	return (true);
 	if (*input_char == 'w')
 		camera->position->z++;
 	else if (*input_char == 'a')
