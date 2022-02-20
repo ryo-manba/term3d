@@ -8,6 +8,7 @@ double display_draw_getscreenpos(const t_axis axis, const double real_pos, const
 {
 	double		screen_pos;
 
+	// return (real_pos);
 	if (camera->mode == PARALLEL)
 	{
 		// 平行投影
