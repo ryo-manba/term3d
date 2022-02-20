@@ -13,14 +13,18 @@ FILES = main.c \
 	vertex_rotateall.c \
 	vertex_expandall.c \
 	vertex_magnitude.c \
+	tm_check.c \
 	tm_create_model_vertexes.c \
+	tm_destroy.c \
 	tm_free_double_pointer.c \
-	tm_read_file.c \
+	tm_init.c \
 	tm_print_error_exit.c \
+	tm_read_file.c \
 	tm_split.c \
 	tm_strjoin.c \
 	tm_vector_utils.c \
 	tm_wrapper.c
+
 SRCS = ${addprefix ${DIR},${FILES}}
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=leak

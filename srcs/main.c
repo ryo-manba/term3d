@@ -15,66 +15,6 @@ static void destructor() {
 # define DISABLE_CURSOR "\033[?25l"
 # define ENABLE_CURSOR "\033[?25h"
 
-static char	check_file_extensions(const char *filename)
-{
-	char	*p;
-
-	p = strrchr(filename, '.');
-	if (p == NULL)
-		print_error_exit("Invalid extension");
-	else if (strcmp(p, ".3d") == 0)
-		return (FILE_TYPE_THREED);
-	else if (strcmp(p, ".obj") == 0)
-		return (FILE_TYPE_OBJ);
-	print_error_exit("Invalid extension");
-	return ('*');
-}
-
-static void check_argc_exit_if_invalid(int argc)
-{
-	if (argc == 2 || argc == 3)
-		return ;
-	printf("Usage: ./term3d file_path [file_path]\n");
-	exit(1);
-}
-
-static void	init_model_vertexes(t_vertex *vertexes[3], int nb_models, char **file_paths)
-{
-	char	*file_data;
-	char	*file_name;
-	char	file_type;
-	int		i;
-
-	i = 0;
-	while (i < nb_models)
-	{
-		file_name = file_paths[i];
-		file_type = check_file_extensions(file_name);
-		file_data = read_file(file_name);
-		vertexes[i] = create_model_vertexes(file_data, file_type);
-		free(file_data);
-		i += 1;
-	}
-	vertexes[nb_models] = NULL;
-}
-
-static void init_pivots(t_vector3 *pivots, int nb_models)
-{
-	int	i;
-	int	sign;
-
-	sign = 1;
-	i = 0;
-	while (i < nb_models)
-	{
-		pivots[i].x = OBJ1_PIVOT_X * sign;
-		pivots[i].y = OBJ1_PIVOT_Y * sign;
-		pivots[i].z = OBJ1_PIVOT_Z * sign;
-		sign *= 1;
-		i += 1;
-	}
-}
-
 static void	vertex_expander(t_vertex **model_vertexes, int nb_models)
 {
 	int	i;
@@ -123,54 +63,13 @@ void	display_models(t_vertex **vertexes, t_camera *camera, char display[DISPLAY_
 	display_print(display);
 }
 
-void	signal_off(int signal1, int signal2)
+static void	signal_off(int signal1, int signal2)
 {
 	if (signal(signal1, SIG_IGN) == SIG_ERR ||
 		signal(signal2, SIG_IGN) == SIG_ERR)
 	{
 		print_error_exit("Signal error");
 	}
-}
-
-void	destroy_vertexes(t_vertex **vertexes)
-{
-	t_vertex *vt;
-	t_vertex *tmp;
-	int	i;
-
-	i = 0;
-	while (vertexes[i])
-	{
-		vt = vertexes[i];
-		while (vt)
-		{
-			tmp = vt;
-			vt = vt->next;
-			free(tmp->position);
-			free(tmp);
-		}
-		i += 1;
-	}
-	free(vertexes[i]);
-}
-
-void destroy_vector(t_vector3 **vec)
-{
-	int	i;
-
-	i = 0;
-	while (vec[i])
-	{
-		free(vec[i]);
-		i += 1;
-	}
-	free(vec[i]);
-}
-
-static void destroy_all(t_vertex **vertexes, t_camera *camera)
-{
-	destroy_vertexes(vertexes);
-	destroy_camera(camera); // 構造体を解放
 }
 
 int main(int argc, char **argv)
