@@ -34,6 +34,7 @@
 # define CAMERA_ANGLE_RANGE 180 // カメラ回転の可動域
 # define FILE_TYPE_THREED ','
 # define FILE_TYPE_OBJ    ' '
+# define MAX_MODEL_SIZE	100
 
 typedef enum e_axis
 {
@@ -72,7 +73,7 @@ typedef struct s_vertex
 typedef struct s_camera
 {
 	struct s_vector3	*position;
-	double		horizontal_angle;
+	double				horizontal_angle;
 	enum e_camera_mode	mode;
 }	t_camera;
 
