@@ -1,19 +1,19 @@
 #include "vertex.h"
 
 static void	rotate(t_vertex *index, const t_axis axis,
-							const double additional_radian,
-							const t_vector3 *pivot);
+				const double additional_radian,
+				const t_vector3 *pivot);
 static void	offset_rotate(double *horizontal_position,
-								double *vertical_position,
-								const double additional_radian,
-								const t_vector2 *offset);
+				double *vertical_position,
+				const double additional_radian,
+				const t_vector2 *offset);
 static void	set_vector2_position(t_vertex *index,
-										double **horizontal_position,
-										double **vertical_position,
-										const t_axis axis);
+				double **horizontal_position,
+				double **vertical_position,
+				const t_axis axis);
 static void	set_vector2_offset(const t_vector3 *pivot,
-									t_vector2 *offset,
-									const t_axis axis);
+				t_vector2 *offset,
+				const t_axis axis);
 
 void	vertex_rotateall(t_vertex *model_vertexes,
 	const t_axis axis, const int angle, const t_vector3 *pivot)
@@ -43,10 +43,12 @@ static void	rotate(t_vertex *index, const t_axis axis,
 
 	set_vector2_offset(pivot, &offset, axis);
 	set_vector2_position(index, &horizontal_position, &vertical_position, axis);
-	offset_rotate(horizontal_position, vertical_position, additional_radian, &offset);
+	offset_rotate(horizontal_position, vertical_position,
+		additional_radian, &offset);
 }
 
-static void	set_vector2_offset(const t_vector3 *pivot, t_vector2 *offset, const t_axis axis)
+static void	set_vector2_offset(const t_vector3 *pivot,
+	t_vector2 *offset, const t_axis axis)
 {
 	if (axis == X_AXIS)
 	{

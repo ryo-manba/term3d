@@ -1,18 +1,18 @@
 #include "display.h"
 
 static double	get_parallel_pos(const t_axis axis,
-									const double real_pos,
-									const t_vertex *index,
-									const t_camera *camera);
+					const double real_pos,
+					const t_vertex *index,
+					const t_camera *camera);
 static double	get_perspective_pos(const t_axis axis,
-										const double real_pos,
-										const t_vertex *index,
-										const t_camera *camera);
+					const double real_pos,
+					const t_vertex *index,
+					const t_camera *camera);
 static double	distance_ratio(const t_axis axis,
-									const t_camera *camera,
-									const t_vertex *index);
+					const t_camera *camera,
+					const t_vertex *index);
 
-double display_draw_getscreenpos(const t_axis axis,
+double	display_draw_getscreenpos(const t_axis axis,
 	const double real_pos,
 	const t_vertex *index,
 	const t_camera *camera)
@@ -64,9 +64,9 @@ static double	get_parallel_pos(const t_axis axis,
 	else
 		additional_radian = (camera->horizontal_angle / 360) * 2 * M_PI;
 	parallel_position = real_pos
-							* cos(additional_radian)
-							- (index->position->z + camera->position->z)
-							* sin(additional_radian);
+		* cos(additional_radian)
+		- (index->position->z + camera->position->z)
+		* sin(additional_radian);
 	return (parallel_position);
 }
 
@@ -77,17 +77,21 @@ static double	get_perspective_pos(const t_axis axis,
 {
 	double	tan_before;
 	double	tan_after;
+	double	additional_radian;
 	double	perspective_position;
 
 	tan_before = real_pos / (camera->position->z - index->position->z);
 	if (axis == Y_AXIS)
 		tan_after = 0;
 	else
-		tan_after =  tan((camera->horizontal_angle / 360) * 2 * M_PI);
+	{
+		additional_radian = camera->horizontal_angle / 360 * 2 * M_PI;
+		tan_after = tan(additional_radian);
+	}
 	perspective_position = camera->position->z
-							* (tan_before
-								* (1 - tan_after * tan_after)
-								/ (1 - tan_after * tan_before)
-								- tan_after);
+		* (tan_before
+			* (1 - tan_after * tan_after)
+			/ (1 - tan_after * tan_before)
+			- tan_after);
 	return (perspective_position);
 }

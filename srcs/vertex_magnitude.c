@@ -6,8 +6,8 @@ double	vertex_magnitude(const t_vector3 *position)
 	double	hypotenuse_xyz_squared;
 
 	hypotenuse_xy_squared = position->x * position->x
-								+ position->y * position->y;
+		+ position->y * position->y;
 	hypotenuse_xyz_squared = hypotenuse_xy_squared
-								+ position->z * position->z;
-	return (sqrt(hypotenuse_xyz_squared)); 
+		+ position->z * position->z;
+	return (sqrt(hypotenuse_xyz_squared));
 }

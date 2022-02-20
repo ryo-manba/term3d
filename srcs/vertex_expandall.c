@@ -14,4 +14,3 @@ void	vertex_expandall(t_vertex *model_vertexes, const int expansion_rate)
 		index = index->next;
 	}
 }
-
