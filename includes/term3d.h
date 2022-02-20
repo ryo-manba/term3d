@@ -73,7 +73,7 @@ typedef struct s_vertex
 typedef struct s_camera
 {
 	struct s_vector3	*position;
-	double		horizontal_angle;
+	double				horizontal_angle;
 	enum e_camera_mode	mode;
 }	t_camera;
 
