@@ -31,6 +31,7 @@
 # define CAMERA_POSITION_Y -5
 # define CAMERA_POSITION_Z -140 // 固定
 # define CAMERA_ANGLE_HORIZONTAL 0 // 水平回転角度
+# define CAMERA_ANGLE_RANGE 60 // カメラ回転の可動域
 # define FILE_TYPE_THREED ','
 # define FILE_TYPE_OBJ    ' '
 

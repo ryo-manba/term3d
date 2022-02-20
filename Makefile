@@ -4,6 +4,7 @@ FILES = main.c \
 	camera_init.c \
 	camera_destory.c \
 	camera_scanf.c \
+	camera_control.c \
 	display_draw.c \
 	display_draw_getscreenpos.c \
 	display_print.c \
