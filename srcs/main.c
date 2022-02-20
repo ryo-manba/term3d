@@ -8,6 +8,7 @@
 
 # define DISABLE_CURSOR "\033[?25l"
 # define ENABLE_CURSOR "\033[?25h"
+
 static char	check_file_extensions(const char *filename)
 {
 	char	*p;
@@ -103,8 +104,8 @@ void	display_models(t_vertex **vertexes, t_camera *camera, char display[DISPLAY_
 {
 	int	i;
 
-	// 画面クリア
-	printf("\x1b[H");
+	printf("\033[2J"); // 画面クリア
+	printf("\033[H"); // カーソル移動
 	// 画面初期化
 	display_init(display);
 	i = 0;
@@ -119,6 +120,15 @@ void	display_models(t_vertex **vertexes, t_camera *camera, char display[DISPLAY_
 	// 画面出力
 	display_print(display);
 	printf("%s", ENABLE_CURSOR);
+}
+
+void	signal_off(int signal1, int signal2)
+{
+	if (signal(signal1, SIG_IGN) == SIG_ERR ||
+		signal(signal2, SIG_IGN) == SIG_ERR)
+	{
+		print_error_exit("Signal error");
+	}
 }
 
 int main(int argc, char **argv)
@@ -137,6 +147,7 @@ int main(int argc, char **argv)
 	vertex_expander(model_vertexes, argc - 1); // 3Dモデルのスケールを既定値に
 	input_flag = false;  // 入力フラグ初期化
 
+	signal_off(SIGINT, SIGQUIT);
 	while (!camera_scanf(camera, &input_c, &input_flag))
 	{
 		camera_control(camera); // カメラ制御
