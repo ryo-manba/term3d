@@ -104,23 +104,19 @@ t_vertex	*create_model_vertexes(const char *file_data, const char delimiter)
 	if (file_data == NULL)
 		print_error_exit("File is empty");
 	newline_delim_data = tm_split(file_data, '\n');
-	i = 0;
 	vt = NULL;
-	while (newline_delim_data[i])
+	i = -1;
+	while (newline_delim_data[++i])
 	{
 		strs = tm_split(newline_delim_data[i], delimiter);
 		check_line_exit_if_invalid((const char **)strs, delimiter);
-		if (strcmp(strs[0], "v") != 0)
+		if (!(offset == 1 && strcmp(strs[0], "v") != 0))
 		{
-			i += 1;
-			continue ;
+			tm_vertex_add_back(&vt, tm_new_vertex(
+					tm_new_vector(xstrtod(strs[0 + offset]),
+						xstrtod(strs[1 + offset]), xstrtod(strs[2 + offset]))));
 		}
-		tm_vertex_add_back(&vt, tm_new_vertex(
-				tm_new_vector(xstrtod(strs[0 + offset]),
-					xstrtod(strs[1 + offset]),
-					xstrtod(strs[2 + offset]))));
 		free_double_pointer((void **)strs);
-		i += 1;
 	}
 	free_double_pointer((void **)newline_delim_data);
 	return (vt);
