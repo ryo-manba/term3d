@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/21 13:07:25 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/21 14:33:50 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static double	get_perspective_pos(const t_axis axis,
 					const t_vertex *index,
 					const t_camera *camera);
 static double	distance_obj(const t_camera *camera,
-					const t_vertex *index, const double real_pos,
-					const double additional_radian);
+					const t_vertex *index);
 
 double	display_draw_getscreenpos(const t_axis axis,
 	const double real_pos,
@@ -87,7 +86,7 @@ static double	get_perspective_pos(const t_axis axis,
 		* addition_theorem_tan(original_radian, (-1) * additional_radian);
 	if (axis == Y_AXIS)
 		perspective_position *= -1;
-	if (distance_obj(camera, index, real_pos, additional_radian) < 0)
+	if (distance_obj(camera, index) < 0)
 	{
 		perspective_position = DISPLAY_WIDTH;
 	}
@@ -95,13 +94,10 @@ static double	get_perspective_pos(const t_axis axis,
 }
 
 static double	distance_obj(const t_camera *camera,
-	const t_vertex *index, const double real_pos,
-	const double additional_radian)
+	const t_vertex *index)
 {
 	double	distance_obj;
 
-	distance_obj = (index->position->z - camera->position->z)
-		* cos(additional_radian)
-		- real_pos * sin(additional_radian);
+	distance_obj = index->position->z - camera->position->z;
 	return (distance_obj);
 }
