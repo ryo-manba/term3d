@@ -13,6 +13,9 @@ FILES = main.c \
 	vertex_rotateall.c \
 	vertex_expandall.c \
 	vertex_magnitude.c \
+	additional_theorem_sin.c \
+	additional_theorem_cos.c \
+	additional_theorem_tan.c \
 	tm_check.c \
 	tm_create_model_vertexes.c \
 	tm_destroy.c \
