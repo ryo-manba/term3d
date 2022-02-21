@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tm_create_model_vertexes.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:28:01 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/21 21:30:19 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ t_vertex	*create_model_vertexes(const char *file_data, const char delimiter)
 	t_vertex	*vt;
 	size_t		i;
 
-	if (file_data == NULL)
-		print_error_exit("File is empty");
 	newline_delim_data = tm_split(file_data, '\n');
 	vt = NULL;
 	i = -1;
@@ -126,6 +124,8 @@ t_vertex	*create_model_vertexes(const char *file_data, const char delimiter)
 		}
 		free_double_pointer((void **)strs);
 	}
+	if (vt == NULL)
+		print_error_exit("Invalid file format");
 	free_double_pointer((void **)newline_delim_data);
 	return (vt);
 }

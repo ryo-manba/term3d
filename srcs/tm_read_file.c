@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tm_read_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:28:01 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/21 21:29:22 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ char	*read_file(const char *file_path)
 		if (fgets(buf, BUF_SIZE - 1, fp) == NULL)
 			break ;
 		if (file_data == NULL)
-		{
 			file_data = xstrdup(buf);
-		}
 		else
 		{
 			tmp = file_data;
@@ -40,6 +38,8 @@ char	*read_file(const char *file_path)
 			free(tmp);
 		}
 	}
+	if (file_data == NULL)
+		print_error_exit("File is empty");
 	xfclose(fp);
 	return (file_data);
 }
