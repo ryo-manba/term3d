@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/21 13:04:58 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:07:25 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ static double	get_parallel_pos(const t_axis axis,
 	else
 	{
 		parallel_position = addition_theorem_cos(index->position->x,
-			index->position->z, additional_radian);
+				index->position->z, additional_radian);
 	}
 	parallel_position *= exp((camera->position->z - CAMERA_POSITION_Z)
-		/ CAMERA_EXPANSION_SMOOTH_RATE);
+			/ CAMERA_EXPANSION_SMOOTH_RATE);
 	if (axis == Y_AXIS)
 		parallel_position *= -1;
 	return (parallel_position);
@@ -74,7 +74,7 @@ static double	get_perspective_pos(const t_axis axis,
 	double	perspective_position;
 
 	original_radian = atan(real_pos
-		/ (camera->position->z - index->position->z));
+			/ (camera->position->z - index->position->z));
 	if (axis == Y_AXIS)
 	{
 		additional_radian = 0;
