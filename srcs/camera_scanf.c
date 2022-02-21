@@ -3,18 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   camera_scanf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:28:00 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/21 22:25:31 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 #include <termios.h>
 #include <fcntl.h>
+#include "tm_utils.h"
 
 #define EOT 4
+
+static int	xtcsetattr(
+		int fildes, int optional_actions, const struct termios *termios_p)
+{
+	if (tcsetattr(fildes, optional_actions, termios_p) == -1)
+		print_error_exit(NULL);
+	return (0);
+}
+
+static int	xtcgetattr(int fildes, struct termios *termios_p)
+{
+	if (tcgetattr(fildes, termios_p) == -1)
+		print_error_exit(NULL);
+	return (0);
+}
 
 static bool	input_handler(t_camera *camera, int input_char)
 {
@@ -41,10 +57,11 @@ static bool	input_handler(t_camera *camera, int input_char)
 
 static void	set_non_blocking_stdin(struct termios *setting)
 {
-	tcgetattr(STDIN_FILENO, setting);
+	xtcgetattr(STDIN_FILENO, setting);
 	setting->c_lflag &= ~(ECHO | ICANON);
-	tcsetattr(STDIN_FILENO, TCSANOW, setting);
-	fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
+	xtcsetattr(STDIN_FILENO, TCSANOW, setting);
+	if (fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK) == -1)
+		print_error_exit(NULL);
 }
 
 bool	camera_scanf(t_camera *camera)
@@ -54,7 +71,8 @@ bool	camera_scanf(t_camera *camera)
 
 	set_non_blocking_stdin(&setting);
 	input_char = getchar();
-	tcsetattr(STDIN_FILENO, TCSANOW, &setting);
-	fcntl(STDIN_FILENO, F_SETFL, setting);
+	xtcsetattr(STDIN_FILENO, TCSANOW, &setting);
+	if (fcntl(STDIN_FILENO, F_SETFL, setting) == 1)
+		print_error_exit(NULL);
 	return (input_handler(camera, input_char));
 }
