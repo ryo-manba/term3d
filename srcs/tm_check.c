@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tm_check.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:28:00 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/21 22:39:11 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	check_argc_exit_if_invalid(int argc)
 {
 	if (argc >= 2)
 		return ;
-	printf("Usage: ./term3d file_path\n");
+	if (argc >= MAX_MODEL_SIZE)
+		printf("too many arguments\n");
+	else
+		printf("Usage: ./term3d file_path\n");
 	exit(EXIT_FAILURE);
 }
