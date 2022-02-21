@@ -1,13 +1,8 @@
 #include "vertex.h"
+#include "additional_theorem.h"
 
 static double	vector2_magnitude(const double vector2_x,
 					const double vector2_y);
-static double	addition_theorem_sin(const double vector2_x,
-					const double vector2_y,
-					const double additional_radian);
-static double	addition_theorem_cos(const double vector2_x,
-					const double vector2_y,
-					const double additional_radian);
 
 void	vertex_rotate(double *horizontal, double *vertical,
 	const double additional_radian)
@@ -22,26 +17,6 @@ void	vertex_rotate(double *horizontal, double *vertical,
 	after = vector2_magnitude(*horizontal, *vertical);
 	*horizontal *= before / after;
 	*vertical *= before / after;
-}
-
-/**
- * sin(α + β) = sinαcosβ + cosαsinβ
- * magnitude * sin(α + β) = ycosβ + xsinβ
- * cos(α + β) = cosαcosβ − sinαsinβ
- * magnitude * cos(α + β) = xcosβ + ysinβ
- */
-static double	addition_theorem_sin(const double vector2_x,
-	const double vector2_y, const double additional_radian)
-{
-	return (vector2_y * cos(additional_radian)
-		+ vector2_x * sin(additional_radian));
-}
-
-static double	addition_theorem_cos(const double vector2_x,
-	const double vector2_y, const double additional_radian)
-{
-	return (vector2_x * cos(additional_radian)
-		- vector2_y * sin(additional_radian));
 }
 
 static double	vector2_magnitude(const double vector2_x,
