@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tm_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:29:01 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/21 23:32:12 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void		free_double_pointer(void **dp);
 void		print_error_exit(const char *msg);
 char		*tm_strjoin(char *s1, char *s2);
 char		**tm_split(char const *s, char c);
+
+/* models_utils */
+void		models_rotate(t_vertex **vertexes,
+				 t_vector3 *pivots, int nb_models);
+void		set_scale(t_vertex **model_vertexes, int nb_models);
 
 /* tm_destroy */
 void		vertexes_destroy(t_vertex **vertexes);

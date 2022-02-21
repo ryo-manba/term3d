@@ -13,6 +13,7 @@ FILES = main.c \
 	vertex_rotateall.c \
 	vertex_expandall.c \
 	vertex_magnitude.c \
+	models_utils.c \
 	additional_theorem_sin.c \
 	additional_theorem_cos.c \
 	additional_theorem_tan.c \

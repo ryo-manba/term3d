@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:28:00 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/21 23:30:15 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,66 +17,10 @@
 #include "tm_utils.h"
 #include "tm_create_model_vertexes.h"
 #include <signal.h>
-#define DISABLE_CURSOR "\033[?25l"
-#define ENABLE_CURSOR  "\033[?25h"
-#define SCREEN_CLEAR   "\033[2J"
-#define MOVE_CURSOR    "\033[H"
-
-/**
- * @brief Set the scale of the 3D model to the default value
- */
-static void	set_scale(t_vertex **model_vertexes, int nb_models)
-{
-	int	i;
-	int	scale;
-
-	i = 0;
-	scale = OBJ_EXPANSION_RATE;
-	while (i < nb_models)
-	{
-		vertex_expandall(model_vertexes[i], scale);
-		i += 1;
-		scale += 1;
-	}
-}
-
-/**
- * @brief Rotate the 3D model around the pivot
- */
-static void	models_rotate(t_vertex **vertexes, t_vector3 *pivots, int nb_models)
-{
-	int	i;
-
-	i = 0;
-	while (i < nb_models)
-	{
-		vertex_rotateall(vertexes[i], X_AXIS,
-			OBJ_ROTATE_SPEED_X + i, &pivots[i]);
-		vertex_rotateall(vertexes[i], Y_AXIS,
-			OBJ_ROTATE_SPEED_Y + i, &pivots[i]);
-		vertex_rotateall(vertexes[i], Z_AXIS,
-			OBJ_ROTATE_SPEED_Z + i, &pivots[i]);
-		i += 1;
-	}
-}
-
-static void	models_print(
-		t_vertex **vertexes, t_camera *camera,
-		char display[DISPLAY_HEIGHT][DISPLAY_WIDTH], int nb_models)
-{
-	int	i;
-
-	printf(SCREEN_CLEAR);
-	printf(MOVE_CURSOR);
-	display_init(display);
-	i = 0;
-	while (i < nb_models)
-	{
-		display_draw(display, vertexes[i], camera);
-		i += 1;
-	}
-	display_print(display);
-}
+#define DISABLE_CURSOR       "\033[?25l"
+#define ENABLE_CURSOR        "\033[?25h"
+#define SCREEN_CLEAR         "\033[2J"
+#define RETURN_TO_TOP_CURSOR "\033[H"
 
 static void	signal_off(int signal1, int signal2)
 {
@@ -87,27 +31,72 @@ static void	signal_off(int signal1, int signal2)
 	}
 }
 
-int	main(int argc, char **argv)
+static void	models_print(
+		t_vertex **vertexes, t_camera *camera,
+		char display[DISPLAY_HEIGHT][DISPLAY_WIDTH], int nb_models)
 {
-	char		display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
-	t_vertex	*model_vertexes[MAX_MODEL_SIZE];
-	t_vector3	pivots[MAX_MODEL_SIZE];
-	t_camera	*camera;
+	int	i;
 
-	check_argc_exit_if_invalid(argc);
-	init_model_vertexes(model_vertexes, argc - 1, argv + 1);
-	init_pivots(pivots, argc - 1);
-	camera = camera_init();
-	set_scale(model_vertexes, argc - 1);
-	signal_off(SIGINT, SIGQUIT);
-	printf(DISABLE_CURSOR);
+	printf(RETURN_TO_TOP_CURSOR);
+	display_init(display);
+	i = 0;
+	while (i < nb_models)
+	{
+		display_draw(display, vertexes[i], camera);
+		i += 1;
+	}
+	display_print(display);
+}
+
+static void	print_help_message(void)
+{
+	printf(""
+		"----------------help-----------------\n"
+		"|[CTRL+D]       -  Close the window |\n"
+		"|[W]            -  Zoom in          |\n"
+		"|[S]            -  Zoom out         |\n"
+		"|[ADQE]         -  Display moves    |\n"
+		"|[JL]           -  Rotate camera    |\n"
+		"-------------------------------------\n");
+}
+
+static void	main_loop(t_vertex *model_vertexes[MAX_MODEL_SIZE],
+					t_vector3 pivots[MAX_MODEL_SIZE],
+					t_camera *camera, const int nb_models)
+{
+	char	display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
+	bool	first_time;
+
+	first_time = true;
 	while (!camera_scanf(camera))
 	{
 		camera_control(camera);
-		models_rotate(model_vertexes, pivots, argc - 1);
-		models_print(model_vertexes, camera, display, argc - 1);
+		models_rotate(model_vertexes, pivots, nb_models);
+		models_print(model_vertexes, camera, display, nb_models);
+		if (first_time == true)
+		{
+			print_help_message();
+			first_time = false;
+		}
 		usleep(1000 * 1000 / FRAMES_PER_SECOND);
 	}
+}
+
+int	main(int argc, char **argv)
+{
+	t_vertex	*model_vertexes[MAX_MODEL_SIZE];
+	t_vector3	pivots[MAX_MODEL_SIZE];
+	t_camera	*camera;
+	const int	nb_models = argc - 1;
+
+	check_argc_exit_if_invalid(argc);
+	init_model_vertexes(model_vertexes, nb_models, argv + 1);
+	init_pivots(pivots, nb_models);
+	camera = camera_init();
+	set_scale(model_vertexes, nb_models);
+	signal_off(SIGINT, SIGQUIT);
+	printf("%s%s", DISABLE_CURSOR, SCREEN_CLEAR);
+	main_loop(model_vertexes, pivots, camera, nb_models);
 	destroy_all(model_vertexes, camera);
 	printf(ENABLE_CURSOR);
 	return (0);
