@@ -30,7 +30,7 @@ FILES = main.c \
 	tm_wrapper.c
 
 SRCS = ${addprefix ${DIR},${FILES}}
-CC = clang
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 OBJS = ${SRCS:.c=.o}
 HEADERS = includes/
