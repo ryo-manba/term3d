@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   term3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:28:01 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/21 13:01:51 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 # define VIEW_ANGLE_WIDTH 120 // 視野角
 # define VIEW_ANGLE_HEIGHT 80
 # define FRAMES_PER_SECOND 60 // FPS
-# define DEFAULT_CAMERA_MODE 1 // 0:平行投影 1:透視投影
+# define DEFAULT_CAMERA_MODE 0 // 0:平行投影 1:透視投影
 # define OBJ_EXPANSION_RATE 1 // スケール
 # define OBJ_ROTATE_SPEED_X 0 // 回転角度
-# define OBJ_ROTATE_SPEED_Y 0
+# define OBJ_ROTATE_SPEED_Y 1
 # define OBJ_ROTATE_SPEED_Z 0
 # define OBJ_PIVOT_X 0 // 回転ピボット
 # define OBJ_PIVOT_Y 0

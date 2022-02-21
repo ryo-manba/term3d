@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_draw_getscreenpos.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:28:00 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/21 13:04:58 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static double	get_perspective_pos(const t_axis axis,
 					const t_vertex *index,
 					const t_camera *camera);
 static double	distance_obj(const t_camera *camera,
-					const t_vertex *index, const double real_pos, const double additional_radian);
+					const t_vertex *index, const double real_pos,
+					const double additional_radian);
 
 double	display_draw_getscreenpos(const t_axis axis,
 	const double real_pos,
@@ -53,9 +54,11 @@ static double	get_parallel_pos(const t_axis axis,
 		parallel_position = real_pos;
 	else
 	{
-		parallel_position = addition_theorem_cos(index->position->x, index->position->z, additional_radian);
+		parallel_position = addition_theorem_cos(index->position->x,
+			index->position->z, additional_radian);
 	}
-	parallel_position *= exp((camera->position->z - CAMERA_POSITION_Z) / CAMERA_EXPANSION_SMOOTH_RATE);
+	parallel_position *= exp((camera->position->z - CAMERA_POSITION_Z)
+		/ CAMERA_EXPANSION_SMOOTH_RATE);
 	if (axis == Y_AXIS)
 		parallel_position *= -1;
 	return (parallel_position);
@@ -70,7 +73,8 @@ static double	get_perspective_pos(const t_axis axis,
 	double	additional_radian;
 	double	perspective_position;
 
-	original_radian = atan(real_pos / (camera->position->z - index->position->z));
+	original_radian = atan(real_pos
+		/ (camera->position->z - index->position->z));
 	if (axis == Y_AXIS)
 	{
 		additional_radian = 0;
@@ -91,11 +95,13 @@ static double	get_perspective_pos(const t_axis axis,
 }
 
 static double	distance_obj(const t_camera *camera,
-	const t_vertex *index, const double real_pos, const double additional_radian)
+	const t_vertex *index, const double real_pos,
+	const double additional_radian)
 {
 	double	distance_obj;
 
-	distance_obj = (index->position->z - camera->position->z) * cos(additional_radian)
-					- real_pos * sin(additional_radian);
+	distance_obj = (index->position->z - camera->position->z)
+		* cos(additional_radian)
+		- real_pos * sin(additional_radian);
 	return (distance_obj);
 }
