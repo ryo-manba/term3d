@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_scanf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/21 22:25:31 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/22 13:14:29 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static bool	input_handler(t_camera *camera, int input_char)
 	else if (input_char == 'e')
 		camera->position->y++;
 	else if (input_char == 'j')
-		camera->horizontal_angle++;
-	else if (input_char == 'l')
 		camera->horizontal_angle--;
+	else if (input_char == 'l')
+		camera->horizontal_angle++;
 	return (false);
 }
 
