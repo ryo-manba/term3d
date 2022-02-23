@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tm_destroy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 07:18:18 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:46:11 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,18 @@ void	models_destroy(t_model *models)
 void	vertexes_destroy(t_vertex *vertexes)
 {
 	t_vertex	*vt;
+	t_vertex	*last;
 	t_vertex	*tmp;
 
 	vt = vertexes;
+	last = vt->prev;
 	while (vt)
 	{
+		if (vt == last)
+		{
+			free(vt);
+			break ;
+		}
 		tmp = vt;
 		vt = vt->next;
 		free(tmp);

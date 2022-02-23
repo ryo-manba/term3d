@@ -6,7 +6,7 @@
 /*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 06:59:50 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:38:25 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_vertex
 	struct s_vector3	position;
 	struct s_vertex		*next;
 	struct s_vertex		*prev;
-	struct s_vertex		*last;
+	struct s_vertex		*head;
 }	t_vertex;
 
 typedef struct s_camera
