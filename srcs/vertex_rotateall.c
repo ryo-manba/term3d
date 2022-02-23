@@ -3,114 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   vertex_rotateall.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 15:42:13 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 10:20:57 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vertex.h"
 
-static void	rotate(t_vertex *index, const t_axis axis,
-				const double additional_radian,
-				const t_vector3 *pivot);
-static void	offset_rotate(double *horizontal_position,
-				double *vertical_position,
-				const double additional_radian,
-				const t_vector2 *offset);
-static void	set_vector2_position(t_vertex *index,
-				double **horizontal_position,
-				double **vertical_position,
-				const t_axis axis);
-static void	set_vector2_offset(const t_vector3 *pivot,
-				t_vector2 *offset,
-				const t_axis axis);
+static void		rotate(t_vertex *index,
+				const t_vector3 *rotation);
+static double	get_radian(const double angle);
 
 void	vertex_rotateall(t_vertex *model_vertexes,
-	const t_axis axis, const int angle, const t_vector3 *pivot)
+	const t_vector3 *rotation, const t_vector3 *pivot)
 {
 	t_vertex		*index;
-	const double	additional_radian = (((double)angle / 360) * 2 * M_PI);
 
-	if (angle % 360 == 0)
-	{
-		return ;
-	}
 	index = model_vertexes;
 	while (true)
 	{
-		rotate(index, axis, additional_radian, pivot);
+		index->position.x -= pivot->x;
+		index->position.y -= pivot->y;
+		index->position.z -= pivot->z;
+		rotate(index, rotation);
+		index->position.x += pivot->x;
+		index->position.y += pivot->y;
+		index->position.z += pivot->z;
 		index = index->next;
 		if (index == index->head)
 			break ;
 	}
 }
 
-static void	rotate(t_vertex *index, const t_axis axis,
-	const double additional_radian,
-	const t_vector3 *pivot)
+static void	rotate(t_vertex *index,
+	const t_vector3 *rotation)
 {
-	double		*horizontal_position;
-	double		*vertical_position;
-	t_vector2	offset;
-
-	set_vector2_offset(pivot, &offset, axis);
-	set_vector2_position(index, &horizontal_position, &vertical_position, axis);
-	offset_rotate(horizontal_position, vertical_position,
-		additional_radian, &offset);
+	vertex_rotate(&(index->position.z), &(index->position.y), get_radian(rotation->x));
+	vertex_rotate(&(index->position.x), &(index->position.z), get_radian(rotation->y));
+	vertex_rotate(&(index->position.x), &(index->position.y), get_radian(rotation->z));
 }
 
-static void	set_vector2_offset(const t_vector3 *pivot,
-	t_vector2 *offset, const t_axis axis)
+static double	get_radian(const double angle)
 {
-	if (axis == X_AXIS)
-	{
-		offset->x = pivot->z;
-		offset->y = pivot->y;
-	}
-	else if (axis == Y_AXIS)
-	{
-		offset->x = pivot->x;
-		offset->y = pivot->z;
-	}
-	else
-	{
-		offset->x = pivot->x;
-		offset->y = pivot->y;
-	}
-}
-
-static void	set_vector2_position(t_vertex *index,
-	double **horizontal_position,
-	double **vertical_position,
-	const t_axis axis)
-{
-	if (axis == X_AXIS)
-	{
-		*horizontal_position = &index->position.z;
-		*vertical_position = &index->position.y;
-	}
-	else if (axis == Y_AXIS)
-	{
-		*horizontal_position = &index->position.x;
-		*vertical_position = &index->position.z;
-	}
-	else
-	{
-		*horizontal_position = &index->position.x;
-		*vertical_position = &index->position.y;
-	}
-}
-
-static void	offset_rotate(double *horizontal_position,
-	double *vertical_position,
-	const double additional_radian,
-	const t_vector2 *offset)
-{
-	*horizontal_position -= offset->x;
-	*vertical_position -= offset->y;
-	vertex_rotate(horizontal_position, vertical_position, additional_radian);
-	*horizontal_position += offset->x;
-	*vertical_position += offset->y;
+	return ((angle / 360) * 2 * M_PI);
 }
