@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   term3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/21 15:23:02 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 11:49:45 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@
 # define CAMERA_ANGLE_HORIZONTAL 0 // 水平回転角度
 # define CAMERA_ANGLE_RANGE 150 // カメラ回転の可動域
 # define PARSE_LEVEL 150
-# define FILE_TYPE_THREED ','
-# define FILE_TYPE_OBJ    ' '
+# define FILE_TYPE_INVALID -1
+# define FILE_TYPE_3D  ','
+# define FILE_TYPE_OBJ ' '
 # define MAX_MODEL_SIZE	100
 
 typedef enum e_axis
@@ -69,11 +70,18 @@ typedef struct s_vector2
 	double	y;
 }	t_vector2;
 
+//t_model[MAX_MODEL_SIZE] models;
+//
+//typedef struct	s_model
+//{
+//	struct s_vertex	 *vertex;
+//	struct s_vector3 pivot;
+//}	t_model;
 typedef struct s_vertex
 {
 	struct s_vector3	*position;
-	double				magnitude;
 	struct s_vertex		*next;
+	struct s_vertex		*prev;
 	struct s_vertex		*last;
 }	t_vertex;
 
