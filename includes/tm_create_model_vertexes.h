@@ -6,7 +6,7 @@
 /*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 13:13:24 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 13:38:17 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 # include "tm_utils.h"
 # include "term3d.h"
 
-t_vertex	*create_model_vertexes(const char *file_data, const char delimiter);
+t_vertex	*create_model_vertexes(const char *file_data, const int delimiter);
 
 #endif

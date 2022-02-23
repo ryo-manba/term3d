@@ -43,24 +43,27 @@ int	check_obj_type(const char *keyword)
 /**
  * @brief Check that the keyword and number of elements are correct.
  */
-bool	check_line_obj(const char **lines)
+bool	check_line_obj(const char **line)
 {
 	int	type;
 	int	i;
 
-	if (lines[0] == NULL)
+	if (line[0] == NULL)
 		return (false);
-	type = check_obj_type(lines[0]);
+	type = check_obj_type(line[0]);
 	if (type == OBJ_NONEXISTENT_KEYWORD)
 		return (false);
-	if (type == OBJ_COMMENT)
-		return (true);
-	i = 0;
-	while (i <= type)
+    i = 1;
+    if (type == OBJ_VERTEX_COORDINATE_VALUE)
 	{
-		if (lines[i] == NULL)
-			return (false);
-		i += 1;
+        while (i < 4)
+        {
+            if (line[i] == NULL)
+                return (false);
+            i += 1;
+        }
+        if (line[i] != NULL)
+            return (false);
 	}
-	return (lines[i] == NULL);
+    return (true);
 }
