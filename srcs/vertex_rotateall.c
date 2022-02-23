@@ -6,14 +6,14 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 11:27:02 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 11:28:53 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vertex.h"
 
 static void		rotate(t_vertex *index,
-				const t_vector3 *rotation);
+					const t_vector3 *rotation);
 static double	get_radian(const double angle);
 
 void	vertex_rotateall(t_vertex *model_vertexes,
@@ -41,14 +41,14 @@ static void	rotate(t_vertex *index,
 	const t_vector3 *rotation)
 {
 	vertex_rotate(&(index->position.z),
-			&(index->position.y),
-			get_radian(rotation->x));
+		&(index->position.y),
+		get_radian(rotation->x));
 	vertex_rotate(&(index->position.x),
-			&(index->position.z),
-			get_radian(rotation->y));
+		&(index->position.z),
+		get_radian(rotation->y));
 	vertex_rotate(&(index->position.x),
-			&(index->position.y),
-			get_radian(rotation->z));
+		&(index->position.y),
+		get_radian(rotation->z));
 }
 
 static double	get_radian(const double angle)
