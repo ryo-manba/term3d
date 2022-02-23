@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   tm_destroy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:28:01 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/23 06:07:40 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tm_utils.h"
 #include "camera.h"
 
-void	destroy_all(t_vertex **vertexes, t_camera *camera)
+void	destroy_all(t_vertex **vertexes)
 {
 	vertexes_destroy(vertexes);
-	camera_destroy(camera);
 }
 
 void	vertexes_destroy(t_vertex **vertexes)
@@ -33,7 +32,6 @@ void	vertexes_destroy(t_vertex **vertexes)
 		{
 			tmp = vt;
 			vt = vt->next;
-			free(tmp->position);
 			free(tmp);
 		}
 		i += 1;

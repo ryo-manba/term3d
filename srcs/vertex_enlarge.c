@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vertex_magnitude.c                                 :+:      :+:    :+:   */
+/*   vertex_enlarge.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:28:01 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/23 03:53:33 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vertex.h"
 
-double	vertex_magnitude(const t_vector3 *position)
+void	vertex_enlarge(t_vertex *model_vertexes, const int expansion_rate)
 {
-	double	hypotenuse_xy_squared;
-	double	hypotenuse_xyz_squared;
+	t_vertex	*index;
 
-	hypotenuse_xy_squared = position->x * position->x
-		+ position->y * position->y;
-	hypotenuse_xyz_squared = hypotenuse_xy_squared
-		+ position->z * position->z;
-	return (sqrt(hypotenuse_xyz_squared));
+	index = model_vertexes;
+	while (index != NULL)
+	{
+		index->position.x *= expansion_rate;
+		index->position.y *= expansion_rate;
+		index->position.z *= expansion_rate;
+		index = index->next;
+	}
 }

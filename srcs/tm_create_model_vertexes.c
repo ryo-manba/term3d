@@ -6,7 +6,7 @@
 /*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 14:27:28 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:57:32 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,8 @@ t_vertex	*create_obj(char **lines)
 		check_line_exit_if_invalid((const char **)line, FILE_TYPE_OBJ);
 		if (strcmp(line[0], "v") == 0)
 		{
-			tm_vertex_add_back(&vt, tm_new_vertex(
-					tm_new_vector(xstrtod(line[1]),
-						xstrtod(line[2]), xstrtod(line[3]))));
+			tm_vertex_add_back(&vt, tm_new_vertex(xstrtod(line[1]),
+						xstrtod(line[2]), xstrtod(line[3])));
 		}
 		free_double_pointer((void **)line);
 		i += 1;

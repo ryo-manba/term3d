@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertex_rotateall.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:31:48 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/23 05:59:04 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,18 +86,18 @@ static void	set_vector2_position(t_vertex *index,
 {
 	if (axis == X_AXIS)
 	{
-		*horizontal_position = &index->position->z;
-		*vertical_position = &index->position->y;
+		*horizontal_position = &index->position.z;
+		*vertical_position = &index->position.y;
 	}
 	else if (axis == Y_AXIS)
 	{
-		*horizontal_position = &index->position->x;
-		*vertical_position = &index->position->z;
+		*horizontal_position = &index->position.x;
+		*vertical_position = &index->position.z;
 	}
 	else
 	{
-		*horizontal_position = &index->position->x;
-		*vertical_position = &index->position->y;
+		*horizontal_position = &index->position.x;
+		*vertical_position = &index->position.y;
 	}
 }
 

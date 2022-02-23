@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   models_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:33:42 by rmatsuka          #+#    #+#             */
-/*   Updated: 2022/02/21 23:33:56 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 03:55:28 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	set_scale(t_vertex **model_vertexes, int nb_models)
 	scale = OBJ_EXPANSION_RATE;
 	while (i < nb_models)
 	{
-		vertex_expandall(model_vertexes[i], scale);
+		vertex_enlarge(model_vertexes[i], scale);
 		i += 1;
 		scale += 1;
 	}
