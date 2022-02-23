@@ -3,33 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   tm_vector_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:28:01 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/23 06:20:28 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/tm_utils.h"
 #include "../includes/tm_wrapper.h"
 
-t_vector3	*tm_new_vector(const double x, const double y, const double z)
-{
-	t_vector3	*new;
-
-	new = (t_vector3 *)xmalloc(sizeof(t_vector3));
-	new->x = x;
-	new->y = y;
-	new->z = z;
-	return (new);
-}
-
-t_vertex	*tm_new_vertex(t_vector3 *vec)
+t_vertex	*tm_new_vertex(const double x, const double y, const double z)
 {
 	t_vertex	*new;
 
 	new = (t_vertex *)xmalloc(sizeof(t_vertex));
-	new->position = vec;
+	new->position.x = x;
+	new->position.y = y;
+	new->position.z = z;
 	new->next = NULL;
 	new->last = new;
 	return (new);

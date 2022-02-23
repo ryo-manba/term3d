@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tm_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/21 23:32:12 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 06:21:40 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,14 @@ void		set_scale(t_vertex **model_vertexes, int nb_models);
 
 /* tm_destroy */
 void		vertexes_destroy(t_vertex **vertexes);
-void		destroy_all(t_vertex **vertexes, t_camera *camera);
+void		destroy_all(t_vertex **vertexes);
 
 /* tm_check */
 char		check_file_extensions(const char *filename);
 void		check_argc_exit_if_invalid(int argc);
 
 /* tm_vector_utils */
-t_vector3	*tm_new_vector(const double x, const double y, const double z);
-t_vertex	*tm_new_vertex(t_vector3 *vec);
+t_vertex	*tm_new_vertex(const double x, const double y, const double z);
 void		tm_vertex_add_back(t_vertex **vt, t_vertex *new);
 
 /* tm_init */

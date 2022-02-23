@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tm_create_model_vertexes.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 12:22:30 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 06:22:24 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,9 @@ t_vertex	*create_model_vertexes(const char *file_data, const char delimiter)
 		check_line_exit_if_invalid((const char **)line, delimiter);
 		if (!(offset == 1 && strcmp(line[0], "v") != 0))
 		{
-			tm_vertex_add_back(&vt, tm_new_vertex(
-					tm_new_vector(xstrtod(line[0 + offset]),
-						xstrtod(line[1 + offset]), xstrtod(line[2 + offset]))));
+			tm_vertex_add_back(&vt, tm_new_vertex(xstrtod(line[0 + offset]),
+				xstrtod(line[1 + offset]),
+				xstrtod(line[2 + offset])));
 		}
 		free_double_pointer((void **)line);
 	}

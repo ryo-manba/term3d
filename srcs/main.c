@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/21 23:30:15 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 06:01:52 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "display.h"
 #include "vertex.h"
 #include "camera.h"
+#include "input.h"
 #include "tm_utils.h"
 #include "tm_create_model_vertexes.h"
 #include <signal.h>
@@ -66,11 +67,16 @@ static void	main_loop(t_vertex *model_vertexes[MAX_MODEL_SIZE],
 {
 	char	display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 	bool	first_time;
+	int		key;
 
 	first_time = true;
-	while (!camera_scanf(camera))
+	while (true)
 	{
-		camera_control(camera);
+		if (input_setkey(&key))
+		{
+			break ;
+		}
+		camera_control(camera, key);
 		models_rotate(model_vertexes, pivots, nb_models);
 		models_print(model_vertexes, camera, display, nb_models);
 		if (first_time == true)
@@ -86,18 +92,18 @@ int	main(int argc, char **argv)
 {
 	t_vertex	*model_vertexes[MAX_MODEL_SIZE];
 	t_vector3	pivots[MAX_MODEL_SIZE];
-	t_camera	*camera;
+	t_camera	camera;
 	const int	nb_models = argc - 1;
 
 	check_argc_exit_if_invalid(argc);
 	init_model_vertexes(model_vertexes, nb_models, argv + 1);
 	init_pivots(pivots, nb_models);
-	camera = camera_init();
+	camera_init(&camera);
 	set_scale(model_vertexes, nb_models);
 	signal_off(SIGINT, SIGQUIT);
 	printf("%s%s", DISABLE_CURSOR, SCREEN_CLEAR);
-	main_loop(model_vertexes, pivots, camera, nb_models);
-	destroy_all(model_vertexes, camera);
+	main_loop(model_vertexes, pivots, &camera, nb_models);
+	destroy_all(model_vertexes);
 	printf(ENABLE_CURSOR);
 	return (0);
 }
