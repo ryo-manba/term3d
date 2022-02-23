@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tm_check_obj_file.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/23 15:06:56 by rmatsuka          #+#    #+#             */
+/*   Updated: 2022/02/23 15:06:57 by rmatsuka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tm_check_file.h"
 
 /**
@@ -53,17 +65,17 @@ bool	check_line_obj(const char **line)
 	type = check_obj_type(line[0]);
 	if (type == OBJ_NONEXISTENT_KEYWORD)
 		return (false);
-    i = 1;
-    if (type == OBJ_VERTEX_COORDINATE_VALUE)
+	i = 1;
+	if (type == OBJ_VERTEX_COORDINATE_VALUE)
 	{
-        while (i < 4)
-        {
-            if (line[i] == NULL)
-                return (false);
-            i += 1;
-        }
-        if (line[i] != NULL)
-            return (false);
+		while (i < 4)
+		{
+			if (line[i] == NULL)
+				return (false);
+			i += 1;
+		}
+		if (line[i] != NULL)
+			return (false);
 	}
-    return (true);
+	return (true);
 }

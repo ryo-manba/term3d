@@ -6,7 +6,7 @@
 /*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 14:57:32 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:08:56 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 #define DELIM_3D  ','
 #define DELIM_3D_CNT  2
 
-static void	check_line_exit_if_invalid(const char **split_line, const char file_type)
+static void	check_line_exit_if_invalid(
+		const char **split_line, const char file_type)
 {
 	if (file_type == FILE_TYPE_3D && !check_line_3d(split_line))
 		print_error_exit("Invalid `.3d` file format");
@@ -26,7 +27,7 @@ static void	check_line_exit_if_invalid(const char **split_line, const char file_
 		print_error_exit("Invalid `.obj` file format");
 }
 
-void	delimiter_cnt_exit_if_invalid(char *line, char delim)
+static void	delimiter_cnt_exit_if_invalid(char *line, char delim)
 {
 	size_t	i;
 	size_t	cnt;
@@ -43,7 +44,7 @@ void	delimiter_cnt_exit_if_invalid(char *line, char delim)
 		print_error_exit("Invalid number of delimiter");
 }
 
-t_vertex	*create_3d(char **lines)
+static t_vertex	*create_3d(char **lines)
 {
 	int			i;
 	char		**line;
@@ -56,16 +57,15 @@ t_vertex	*create_3d(char **lines)
 		delimiter_cnt_exit_if_invalid(lines[i], DELIM_3D);
 		line = tm_split(lines[i], DELIM_3D);
 		check_line_exit_if_invalid((const char **)line, DELIM_3D);
-		tm_vertex_add_back(&vt, tm_new_vertex(
-				tm_new_vector(xstrtod(line[0]),
-					xstrtod(line[1]), xstrtod(line[2]))));
+		tm_vertex_add_back(&vt, tm_new_vertex(xstrtod(line[0]),
+				xstrtod(line[1]), xstrtod(line[2])));
 		free_double_pointer((void **)line);
 		i += 1;
 	}
 	return (vt);
 }
 
-t_vertex	*create_obj(char **lines)
+static t_vertex	*create_obj(char **lines)
 {
 	int			i;
 	char		**line;
@@ -80,7 +80,7 @@ t_vertex	*create_obj(char **lines)
 		if (strcmp(line[0], "v") == 0)
 		{
 			tm_vertex_add_back(&vt, tm_new_vertex(xstrtod(line[1]),
-						xstrtod(line[2]), xstrtod(line[3])));
+					xstrtod(line[2]), xstrtod(line[3])));
 		}
 		free_double_pointer((void **)line);
 		i += 1;
