@@ -6,7 +6,7 @@
 /*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 11:49:57 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 21:27:06 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@ char	check_file_extensions(const char *filename)
 	return (FILE_TYPE_INVALID);
 }
 
-void	check_argc_exit_if_invalid(int argc)
+void	check_argc_exit_if_invalid(const int argc)
 {
-	if (argc >= 2)
+	if (2 <= argc && argc - 1 <= MAX_MODEL_SIZE)
 		return ;
-	if (argc >= MAX_MODEL_SIZE)
-		printf("too many arguments\n");
 	else
-		printf("Usage: ./term3d file_path\n");
+		printf(""
+			"Usage: ./term3d file_path (Object max is %d)\n", MAX_MODEL_SIZE);
 	exit(EXIT_FAILURE);
 }

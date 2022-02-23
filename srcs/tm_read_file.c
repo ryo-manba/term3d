@@ -6,7 +6,7 @@
 /*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/21 21:29:22 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 20:59:07 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ char	*read_file(const char *file_path)
 
 	fp = xfopen(file_path, "r");
 	file_data = NULL;
-	while (true)
+	while (fgets(buf, BUF_SIZE - 1, fp) != NULL)
 	{
-		if (fgets(buf, BUF_SIZE - 1, fp) == NULL)
-			break ;
 		if (file_data == NULL)
 			file_data = xstrdup(buf);
 		else

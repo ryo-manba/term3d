@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 07:15:40 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 21:32:02 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	signal_off(int signal1, int signal2)
 }
 
 static void	models_print(
-		t_model models[MAX_MODEL_SIZE], t_camera *camera,
+		t_model models[], t_camera *camera,
 		char display[DISPLAY_HEIGHT][DISPLAY_WIDTH], int nb_models)
 {
 	int	i;
@@ -61,7 +61,7 @@ static void	print_help_message(void)
 		"-------------------------------------\n");
 }
 
-static void	main_loop(t_model models[MAX_MODEL_SIZE],
+static void	main_loop(t_model models[],
 					t_camera *camera, const int nb_models)
 {
 	char	display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
@@ -89,7 +89,7 @@ static void	main_loop(t_model models[MAX_MODEL_SIZE],
 
 int	main(int argc, char **argv)
 {
-	t_model		models[MAX_MODEL_SIZE];
+	t_model		models[MAX_MODEL_SIZE + 1];
 	t_camera	camera;
 	const int	nb_models = argc - 1;
 

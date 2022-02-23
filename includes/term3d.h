@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   term3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 11:26:23 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 21:00:50 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define FILE_TYPE_3D  1
 # define FILE_TYPE_OBJ 2
 # define FILE_TYPE_INVALID -1
-# define MAX_MODEL_SIZE	100
+# define MAX_MODEL_SIZE	5
 
 typedef enum e_axis
 {
