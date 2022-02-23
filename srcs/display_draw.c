@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 05:59:04 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:42:49 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	display_draw(char display[][DISPLAY_WIDTH],
 	int			y;
 
 	index = (t_vertex *)model_vertexes;
-	while (index != NULL)
+	while (true)
 	{
 		x = get_screen_position(X_AXIS, index, camera);
 		y = get_screen_position(Y_AXIS, index, camera);
@@ -36,6 +36,8 @@ void	display_draw(char display[][DISPLAY_WIDTH],
 		}
 		display[y][x] = '.';
 		index = index->next;
+		if (index == index->head)
+			break ;
 	}
 }
 

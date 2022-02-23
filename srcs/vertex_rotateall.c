@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertex_rotateall.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 05:59:04 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:42:13 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ void	vertex_rotateall(t_vertex *model_vertexes,
 		return ;
 	}
 	index = model_vertexes;
-	while (index != NULL)
+	while (true)
 	{
 		rotate(index, axis, additional_radian, pivot);
 		index = index->next;
+		if (index == index->head)
+			break ;
 	}
 }
 
