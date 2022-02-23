@@ -18,6 +18,8 @@ FILES = main.c \
 	additional_theorem_cos.c \
 	additional_theorem_tan.c \
 	tm_check.c \
+	tm_check_obj_file.c \
+	tm_check_3d_file.c \
 	tm_create_model_vertexes.c \
 	tm_destroy.c \
 	tm_free_double_pointer.c \
