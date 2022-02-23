@@ -3,7 +3,7 @@ DIR = srcs/
 FILES = main.c \
 	camera_init.c \
 	camera_destroy.c \
-	camera_scanf.c \
+	input_setkey.c \
 	camera_control.c \
 	display_draw.c \
 	display_draw_getscreenpos.c \
@@ -11,8 +11,7 @@ FILES = main.c \
 	display_init.c \
 	vertex_rotate.c \
 	vertex_rotateall.c \
-	vertex_expandall.c \
-	vertex_magnitude.c \
+	vertex_enlarge.c \
 	models_utils.c \
 	additional_theorem_sin.c \
 	additional_theorem_cos.c \

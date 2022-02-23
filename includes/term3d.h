@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/22 13:21:49 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 03:57:25 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@
 
 # define DISPLAY_HEIGHT 40
 # define DISPLAY_WIDTH 120
-# define DISPLAY_DISTANCE 10
-# define VIEW_ANGLE_WIDTH 120 // 視野角
-# define VIEW_ANGLE_HEIGHT 80
+# define DISPLAY_DISTANCE 20
 # define FRAMES_PER_SECOND 60 // FPS
 # define DEFAULT_CAMERA_MODE 1 // 0:平行投影 1:透視投影
 # define OBJ_EXPANSION_RATE 1 // スケール
@@ -39,7 +37,6 @@
 # define CAMERA_EXPANSION_SMOOTH_RATE 120
 # define CAMERA_ANGLE_HORIZONTAL 0 // 水平回転角度
 # define CAMERA_ANGLE_RANGE 150 // カメラ回転の可動域
-# define PARSE_LEVEL 150
 # define FILE_TYPE_THREED ','
 # define FILE_TYPE_OBJ    ' '
 # define MAX_MODEL_SIZE	100
@@ -73,7 +70,6 @@ typedef struct s_vector2
 typedef struct s_vertex
 {
 	struct s_vector3	*position;
-	double				magnitude;
 	struct s_vertex		*next;
 	struct s_vertex		*last;
 }	t_vertex;

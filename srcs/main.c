@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/21 23:30:15 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 04:11:19 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "display.h"
 #include "vertex.h"
 #include "camera.h"
+#include "input.h"
 #include "tm_utils.h"
 #include "tm_create_model_vertexes.h"
 #include <signal.h>
@@ -66,11 +67,16 @@ static void	main_loop(t_vertex *model_vertexes[MAX_MODEL_SIZE],
 {
 	char	display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 	bool	first_time;
+	int		key;
 
 	first_time = true;
-	while (!camera_scanf(camera))
+	while (true)
 	{
-		camera_control(camera);
+		if (input_setkey(&key))
+		{
+			break ;
+		}
+		camera_control(camera, key);
 		models_rotate(model_vertexes, pivots, nb_models);
 		models_print(model_vertexes, camera, display, nb_models);
 		if (first_time == true)
