@@ -6,7 +6,7 @@
 /*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/21 22:39:11 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 11:49:57 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ char	check_file_extensions(const char *filename)
 	if (p == NULL)
 		print_error_exit("Invalid extension");
 	else if (strcmp(p, ".3d") == 0)
-		return (FILE_TYPE_THREED);
+		return (FILE_TYPE_3D);
 	else if (strcmp(p, ".obj") == 0)
 		return (FILE_TYPE_OBJ);
 	print_error_exit("Invalid extension");
-	return ('*');
+	return (FILE_TYPE_INVALID);
 }
 
 void	check_argc_exit_if_invalid(int argc)

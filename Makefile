@@ -2,7 +2,6 @@ NAME = term3d
 DIR = srcs/
 FILES = main.c \
 	camera_init.c \
-	camera_destroy.c \
 	input_setkey.c \
 	camera_control.c \
 	display_draw.c \

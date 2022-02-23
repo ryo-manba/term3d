@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 05:59:59 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 06:07:40 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	vertexes_destroy(t_vertex **vertexes)
 		{
 			tmp = vt;
 			vt = vt->next;
-			free(tmp->position);
 			free(tmp);
 		}
 		i += 1;

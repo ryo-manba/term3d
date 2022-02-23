@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 05:59:18 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 06:07:08 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,4 @@ void	camera_init(t_camera *camera)
 	camera->position.z = CAMERA_POSITION_Z;
 	camera->horizontal_angle = CAMERA_ANGLE_HORIZONTAL;
 	camera->mode = DEFAULT_CAMERA_MODE;
-	return (camera);
 }

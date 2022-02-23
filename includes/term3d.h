@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 05:56:37 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 06:23:08 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 # define DISPLAY_WIDTH 120
 # define DISPLAY_DISTANCE 20
 # define FRAMES_PER_SECOND 60 // FPS
-# define DEFAULT_CAMERA_MODE 1 // 0:平行投影 1:透視投影
+# define DEFAULT_CAMERA_MODE 0 // 0:平行投影 1:透視投影
 # define OBJ_EXPANSION_RATE 1 // スケール
 # define OBJ_ROTATE_SPEED_X 0 // 回転角度
-# define OBJ_ROTATE_SPEED_Y 0
+# define OBJ_ROTATE_SPEED_Y 1
 # define OBJ_ROTATE_SPEED_Z 0
 # define OBJ_PIVOT_X 0 // 回転ピボット
 # define OBJ_PIVOT_Y 0
@@ -37,8 +37,9 @@
 # define CAMERA_EXPANSION_SMOOTH_RATE 120
 # define CAMERA_ANGLE_HORIZONTAL 0 // 水平回転角度
 # define CAMERA_ANGLE_RANGE 150 // カメラ回転の可動域
-# define FILE_TYPE_THREED ','
-# define FILE_TYPE_OBJ    ' '
+# define FILE_TYPE_INVALID -1
+# define FILE_TYPE_3D  ','
+# define FILE_TYPE_OBJ ' '
 # define MAX_MODEL_SIZE	100
 
 typedef enum e_axis
@@ -67,10 +68,18 @@ typedef struct s_vector2
 	double	y;
 }	t_vector2;
 
+//t_model[MAX_MODEL_SIZE] models;
+//
+//typedef struct	s_model
+//{
+//	struct s_vertex	 *vertex;
+//	struct s_vector3 pivot;
+//}	t_model;
 typedef struct s_vertex
 {
 	struct s_vector3	position;
 	struct s_vertex		*next;
+	struct s_vertex		*prev;
 	struct s_vertex		*last;
 }	t_vertex;
 
