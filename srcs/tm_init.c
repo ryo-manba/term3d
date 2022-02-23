@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tm_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 07:02:23 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 21:32:09 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "tm_create_model_vertexes.h"
 
 void	models_init(
-		t_model models[MAX_MODEL_SIZE], int nb_models, char **file_paths)
+		t_model models[], const int nb_models, char **file_paths)
 {
 	char	*file_data;
 	char	*file_name;
