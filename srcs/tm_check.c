@@ -32,7 +32,6 @@ void	check_argc_exit_if_invalid(const int argc)
 	if (2 <= argc && argc - 1 <= MAX_MODEL_SIZE)
 		return ;
 	else
-		printf(""
-			"Usage: ./term3d file_path (Object max is %d)\n", MAX_MODEL_SIZE);
+		printf("Usage: ./term3d file_path (Object max is %d)\n", MAX_MODEL_SIZE);
 	exit(EXIT_FAILURE);
 }
