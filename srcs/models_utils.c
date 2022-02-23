@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:33:42 by rmatsuka          #+#    #+#             */
-/*   Updated: 2022/02/23 10:12:08 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 11:27:27 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	models_rotate(t_model *models, const int nb_models)
 {
 	int			i;
 	t_vector3	rotation;
-	
+
 	i = 0;
 	while (i < nb_models)
 	{
