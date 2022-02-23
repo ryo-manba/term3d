@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 20:25:49 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 13:39:33 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	display_draw(char display[][DISPLAY_WIDTH],
 	{
 		x = get_screen_position(X_AXIS, index, camera);
 		y = get_screen_position(Y_AXIS, index, camera);
-		if ((0 <= y && y < DISPLAY_HEIGHT - 1) && \
+		if ((0 <= y && y <= DISPLAY_HEIGHT - 1) && \
 			(0 <= x && x < DISPLAY_WIDTH - 1))
 		{
 			display[y][x] = '.';
