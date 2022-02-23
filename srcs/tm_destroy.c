@@ -6,35 +6,35 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 06:07:40 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 07:18:18 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tm_utils.h"
 #include "camera.h"
 
-void	destroy_all(t_vertex **vertexes)
+void	models_destroy(t_model *models)
 {
-	vertexes_destroy(vertexes);
+	int	index;
+
+	index = 0;
+	while (models[index].vertexes != NULL)
+	{
+		vertexes_destroy(models[index].vertexes);
+		index++;
+	}
 }
 
-void	vertexes_destroy(t_vertex **vertexes)
+void	vertexes_destroy(t_vertex *vertexes)
 {
 	t_vertex	*vt;
 	t_vertex	*tmp;
-	int			i;
 
-	i = 0;
-	while (vertexes[i])
+	vt = vertexes;
+	while (vt)
 	{
-		vt = vertexes[i];
-		while (vt)
-		{
-			tmp = vt;
-			vt = vt->next;
-			free(tmp);
-		}
-		i += 1;
+		tmp = vt;
+		vt = vt->next;
+		free(tmp);
 	}
-	free(vertexes[i]);
 }
