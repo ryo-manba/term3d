@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   term3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
 /*   Updated: 2022/02/23 06:59:50 by tkanzaki         ###   ########.fr       */
@@ -38,8 +38,9 @@
 # define CAMERA_ANGLE_HORIZONTAL 0 // 水平回転角度
 # define CAMERA_ANGLE_RANGE 150 // カメラ回転の可動域
 # define FILE_TYPE_INVALID -1
-# define FILE_TYPE_3D  ','
-# define FILE_TYPE_OBJ ' '
+# define FILE_TYPE_3D  1
+# define FILE_TYPE_OBJ 2
+# define FILE_TYPE_INVALID -1
 # define MAX_MODEL_SIZE	100
 
 typedef enum e_axis
