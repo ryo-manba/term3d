@@ -6,7 +6,7 @@
 /*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 15:42:49 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 20:25:49 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ void	display_draw(char display[][DISPLAY_WIDTH],
 	{
 		x = get_screen_position(X_AXIS, index, camera);
 		y = get_screen_position(Y_AXIS, index, camera);
-		if (y >= DISPLAY_HEIGHT - 1 || x >= DISPLAY_WIDTH - 1
-			|| y < 0 || x < 0)
+		if ((0 <= y && y < DISPLAY_HEIGHT - 1) && \
+			(0 <= x && x < DISPLAY_WIDTH - 1))
 		{
-			index = index->next;
-			continue ;
+			display[y][x] = '.';
 		}
-		display[y][x] = '.';
 		index = index->next;
 		if (index == index->head)
 			break ;
