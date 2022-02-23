@@ -6,7 +6,7 @@
 /*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 11:51:16 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 12:22:30 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,10 @@ void	delimiter_cnt_exit_if_invalid(char *line, char delim)
 			cnt += 1;
 		i += 1;
 	}
-	if (delim == DELIM_OBJ && cnt != DELIM_OBJ_CNT)
-		print_error_exit("Invalid `.obj` file format");
+	if (delim == DELIM_OBJ && cnt != DELIM_OBJ_CNT && line[1] == 'v' && line[2] == ' ')
+		print_error_exit("Invalid number of delimiter");
 	if (delim == DELIM_3D && cnt != DELIM_3D_CNT)
-		print_error_exit("Invalid `.3d` file format");
+		print_error_exit("Invalid number of delimiter");
 }
 
 /**
