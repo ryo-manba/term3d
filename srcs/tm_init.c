@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   tm_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:28:01 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/23 07:02:23 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tm_utils.h"
 #include "tm_create_model_vertexes.h"
 
-void	init_model_vertexes(
-		t_vertex *vertexes[MAX_MODEL_SIZE], int nb_models, char **file_paths)
+void	models_init(
+		t_model models[MAX_MODEL_SIZE], int nb_models, char **file_paths)
 {
 	char	*file_data;
 	char	*file_name;
@@ -27,26 +27,12 @@ void	init_model_vertexes(
 		file_name = file_paths[i];
 		file_type = check_file_extensions(file_name);
 		file_data = read_file(file_name);
-		vertexes[i] = create_model_vertexes(file_data, file_type);
+		models[i].vertexes = create_model_vertexes(file_data, file_type);
+		models[i].pivot.x = OBJ_PIVOT_X * i;
+		models[i].pivot.y = OBJ_PIVOT_Y * i;
+		models[i].pivot.z = OBJ_PIVOT_Z * i;
 		free(file_data);
 		i += 1;
 	}
-	vertexes[nb_models] = NULL;
-}
-
-void	init_pivots(t_vector3 *pivots, int nb_models)
-{
-	int	i;
-	int	sign;
-
-	sign = 1;
-	i = 0;
-	while (i < nb_models)
-	{
-		pivots[i].x = OBJ_PIVOT_X * sign;
-		pivots[i].y = OBJ_PIVOT_Y * sign;
-		pivots[i].z = OBJ_PIVOT_Z * sign;
-		sign *= 1;
-		i += 1;
-	}
+	models[nb_models].vertexes = NULL;
 }
