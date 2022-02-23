@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 03:55:28 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 10:11:59 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include "term3d.h"
 
 void	vertex_rotateall(t_vertex *model_vertexes,
-			const t_axis axis,
-			const int angle,
+			const t_vector3 *rotation,
 			const t_vector3 *pivot);
 void	vertex_rotate(double *horizontal,
 			double *vertical,

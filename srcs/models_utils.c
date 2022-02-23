@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:33:42 by rmatsuka          #+#    #+#             */
-/*   Updated: 2022/02/23 07:15:00 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 10:12:08 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ void	models_rescale(t_model *models, int nb_models)
  */
 void	models_rotate(t_model *models, const int nb_models)
 {
-	int	i;
-
+	int			i;
+	t_vector3	rotation;
+	
 	i = 0;
 	while (i < nb_models)
 	{
-		vertex_rotateall(models[i].vertexes, X_AXIS,
-			OBJ_ROTATE_SPEED_X + i, &models[i].pivot);
-		vertex_rotateall(models[i].vertexes, Y_AXIS,
-			OBJ_ROTATE_SPEED_Y + i, &models[i].pivot);
-		vertex_rotateall(models[i].vertexes, Z_AXIS,
-			OBJ_ROTATE_SPEED_Z + i, &models[i].pivot);
+		rotation.x = OBJ_ROTATE_SPEED_X + i;
+		rotation.y = OBJ_ROTATE_SPEED_Y + i;
+		rotation.z = OBJ_ROTATE_SPEED_Z + i;
+		vertex_rotateall(models[i].vertexes,
+			&rotation, &models[i].pivot);
 		i += 1;
 	}
 }
