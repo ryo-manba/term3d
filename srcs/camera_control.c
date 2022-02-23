@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 04:09:31 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 05:59:04 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	camera_control(t_camera *camera, int key)
 {
 	if (key == 'w')
-		camera->position->z++;
+		camera->position.z++;
 	else if (key == 'a')
-		camera->position->x--;
+		camera->position.x--;
 	else if (key == 's')
-		camera->position->z--;
+		camera->position.z--;
 	else if (key == 'd')
-		camera->position->x++;
+		camera->position.x++;
 	else if (key == 'q')
-		camera->position->y--;
+		camera->position.y--;
 	else if (key == 'e')
-		camera->position->y++;
+		camera->position.y++;
 	else if (key == 'j'
 		&& camera->horizontal_angle > (-1) * CAMERA_ANGLE_RANGE / 2)
 		camera->horizontal_angle--;

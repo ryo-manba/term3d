@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 03:57:25 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 05:56:37 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ typedef struct s_vector2
 
 typedef struct s_vertex
 {
-	struct s_vector3	*position;
+	struct s_vector3	position;
 	struct s_vertex		*next;
 	struct s_vertex		*last;
 }	t_vertex;
 
 typedef struct s_camera
 {
-	struct s_vector3	*position;
+	struct s_vector3	position;
 	double				horizontal_angle;
 	enum e_camera_mode	mode;
 }	t_camera;

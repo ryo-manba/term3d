@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkrm <tkrm@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/20 23:28:00 by tkrm             ###   ########.fr       */
+/*   Updated: 2022/02/23 05:59:04 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ static int	get_screen_position(const t_axis axis,
 {
 	if (axis == X_AXIS)
 		return ((int)display_draw_getscreenpos(axis,
-				index->position->x,
+				index->position.x,
 				index,
 				camera)
 			+ DISPLAY_WIDTH / 2
-			- camera->position->x);
+			- camera->position.x);
 	else
 		return ((int)display_draw_getscreenpos(axis,
-				index->position->y,
+				index->position.y,
 				index,
 				camera)
 			+ DISPLAY_HEIGHT / 2
-			- camera->position->y);
+			- camera->position.y);
 }

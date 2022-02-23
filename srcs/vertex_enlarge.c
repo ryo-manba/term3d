@@ -19,9 +19,9 @@ void	vertex_enlarge(t_vertex *model_vertexes, const int expansion_rate)
 	index = model_vertexes;
 	while (index != NULL)
 	{
-		index->position->x *= expansion_rate;
-		index->position->y *= expansion_rate;
-		index->position->z *= expansion_rate;
+		index->position.x *= expansion_rate;
+		index->position.y *= expansion_rate;
+		index->position.z *= expansion_rate;
 		index = index->next;
 	}
 }

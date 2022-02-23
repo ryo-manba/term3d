@@ -6,31 +6,17 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/21 12:58:09 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 05:59:18 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
-t_camera	*camera_init(void)
+void	camera_init(t_camera *camera)
 {
-	t_camera	*camera;
-	t_vector3	*position;
-
-	position = (t_vector3 *)malloc(sizeof(t_vector3));
-	if (position == NULL)
-	{
-		exit(EXIT_FAILURE);
-	}
-	position->x = CAMERA_POSITION_X;
-	position->y = CAMERA_POSITION_Y;
-	position->z = CAMERA_POSITION_Z;
-	camera = (t_camera *)malloc(sizeof(t_camera));
-	if (camera == NULL)
-	{
-		exit(EXIT_FAILURE);
-	}
-	camera->position = position;
+	camera->position.x = CAMERA_POSITION_X;
+	camera->position.y = CAMERA_POSITION_Y;
+	camera->position.z = CAMERA_POSITION_Z;
 	camera->horizontal_angle = CAMERA_ANGLE_HORIZONTAL;
 	camera->mode = DEFAULT_CAMERA_MODE;
 	return (camera);
