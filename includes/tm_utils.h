@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 06:21:40 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 07:19:05 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ char		*tm_strjoin(char *s1, char *s2);
 char		**tm_split(char const *s, char c);
 
 /* models_utils */
-void		models_rotate(t_vertex **vertexes,
-				 t_vector3 *pivots, int nb_models);
-void		set_scale(t_vertex **model_vertexes, int nb_models);
+void		models_rotate(t_model *models, const int nb_models);
+void		models_rescale(t_model *models, int nb_models);
 
 /* tm_destroy */
-void		vertexes_destroy(t_vertex **vertexes);
-void		destroy_all(t_vertex **vertexes);
+void		vertexes_destroy(t_vertex *vertexes);
+void		models_destroy(t_model *models);
 
 /* tm_check */
 char		check_file_extensions(const char *filename);
@@ -41,8 +40,8 @@ t_vertex	*tm_new_vertex(const double x, const double y, const double z);
 void		tm_vertex_add_back(t_vertex **vt, t_vertex *new);
 
 /* tm_init */
-void		init_model_vertexes(
-				t_vertex *vertexes[MAX_MODEL_SIZE],
+void		models_init(
+				t_model model[MAX_MODEL_SIZE],
 				int nb_models, char **file_paths);
 void		init_pivots(t_vector3 *pivots, int nb_models);
 

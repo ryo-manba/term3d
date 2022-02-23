@@ -6,7 +6,7 @@
 /*   By: tkanzaki <tkanzaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:00 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 06:01:52 by tkanzaki         ###   ########.fr       */
+/*   Updated: 2022/02/23 07:15:40 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	signal_off(int signal1, int signal2)
 }
 
 static void	models_print(
-		t_vertex **vertexes, t_camera *camera,
+		t_model models[MAX_MODEL_SIZE], t_camera *camera,
 		char display[DISPLAY_HEIGHT][DISPLAY_WIDTH], int nb_models)
 {
 	int	i;
@@ -43,7 +43,7 @@ static void	models_print(
 	i = 0;
 	while (i < nb_models)
 	{
-		display_draw(display, vertexes[i], camera);
+		display_draw(display, models[i].vertexes, camera);
 		i += 1;
 	}
 	display_print(display);
@@ -61,8 +61,7 @@ static void	print_help_message(void)
 		"-------------------------------------\n");
 }
 
-static void	main_loop(t_vertex *model_vertexes[MAX_MODEL_SIZE],
-					t_vector3 pivots[MAX_MODEL_SIZE],
+static void	main_loop(t_model models[MAX_MODEL_SIZE],
 					t_camera *camera, const int nb_models)
 {
 	char	display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
@@ -77,8 +76,8 @@ static void	main_loop(t_vertex *model_vertexes[MAX_MODEL_SIZE],
 			break ;
 		}
 		camera_control(camera, key);
-		models_rotate(model_vertexes, pivots, nb_models);
-		models_print(model_vertexes, camera, display, nb_models);
+		models_rotate(models, nb_models);
+		models_print(models, camera, display, nb_models);
 		if (first_time == true)
 		{
 			print_help_message();
@@ -90,20 +89,18 @@ static void	main_loop(t_vertex *model_vertexes[MAX_MODEL_SIZE],
 
 int	main(int argc, char **argv)
 {
-	t_vertex	*model_vertexes[MAX_MODEL_SIZE];
-	t_vector3	pivots[MAX_MODEL_SIZE];
+	t_model		models[MAX_MODEL_SIZE];
 	t_camera	camera;
 	const int	nb_models = argc - 1;
 
 	check_argc_exit_if_invalid(argc);
-	init_model_vertexes(model_vertexes, nb_models, argv + 1);
-	init_pivots(pivots, nb_models);
+	models_init(models, nb_models, argv + 1);
 	camera_init(&camera);
-	set_scale(model_vertexes, nb_models);
+	models_rescale(models, nb_models);
 	signal_off(SIGINT, SIGQUIT);
 	printf("%s%s", DISABLE_CURSOR, SCREEN_CLEAR);
-	main_loop(model_vertexes, pivots, &camera, nb_models);
-	destroy_all(model_vertexes);
+	main_loop(models, &camera, nb_models);
+	models_destroy(models);
 	printf(ENABLE_CURSOR);
 	return (0);
 }

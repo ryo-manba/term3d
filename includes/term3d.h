@@ -6,7 +6,7 @@
 /*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 14:56:12 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 06:59:50 by tkanzaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,12 @@ typedef struct s_vector2
 	double	y;
 }	t_vector2;
 
-//t_model[MAX_MODEL_SIZE] models;
-//
-//typedef struct	s_model
-//{
-//	struct s_vertex	 *vertex;
-//	struct s_vector3 pivot;
-//}	t_model;
+typedef struct	s_model
+{
+	struct s_vertex	 *vertexes;
+	struct s_vector3 pivot;
+}	t_model;
+
 typedef struct s_vertex
 {
 	struct s_vector3	position;
