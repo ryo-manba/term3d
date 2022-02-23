@@ -6,7 +6,7 @@
 /*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 15:39:03 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:51:01 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,11 @@ void	tm_vertex_add_back(t_vertex **vt, t_vertex *new)
 		*vt = new;
 	else
 	{
-//		(*vt)->last->next = new;
-//		(*vt)->last = new->last;
 		last = (*vt)->prev;
-		last->head = *vt;
 		last->next = new;
-		new->next = *vt;
 		new->prev = last;
+		new->next = *vt;
+		new->head = *vt;
 		(*vt)->prev = new;
 	}
 }
