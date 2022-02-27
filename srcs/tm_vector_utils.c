@@ -6,7 +6,7 @@
 /*   By: rmatsuka < rmatsuka@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:28:01 by tkrm              #+#    #+#             */
-/*   Updated: 2022/02/23 15:51:01 by rmatsuka         ###   ########.fr       */
+/*   Updated: 2022/02/27 12:28:35 by rmatsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_vertex	*tm_new_vertex(const double x, const double y, const double z)
 	new->position.x = x;
 	new->position.y = y;
 	new->position.z = z;
-	new->next = NULL;
+	new->next = new;
 	new->prev = new;
 	new->head = new;
 	return (new);
