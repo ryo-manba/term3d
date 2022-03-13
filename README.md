@@ -12,7 +12,7 @@ A 3D rendering program in the terminal.
 ## Usage
 
 ```
-git clone <https://github.com/ryo-manba/term3d>
+git clone https://github.com/ryo-manba/term3d
 cd term3d && make
 ```
 
